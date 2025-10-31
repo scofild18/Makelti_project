@@ -29,7 +29,7 @@ class SearchBarWidget extends StatelessWidget {
       child: TextField(
         decoration: InputDecoration(
           hintText: 'Search food or store...',
-          hintStyle: TextStyle(color: Color.fromARGB(255, 114, 114, 114) , fontWeight: FontWeight.w200 , fontSize:14),
+          hintStyle: TextStyle(color: Color.fromARGB(255, 114, 114, 114) , fontWeight: FontWeight.w400 , fontSize:14),
           border: InputBorder.none,
         ),
       ),

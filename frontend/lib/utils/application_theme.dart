@@ -62,15 +62,8 @@ class AppTheme {
       foregroundColor: Colors.white,
     ),
 
-    cardTheme: CardTheme(
-      color: Colors.white,
-      elevation: 3,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-      shadowColor: Colors.black.withOpacity(0.05),
-    ),
-  );
 
-  /// 🌙 Dark Theme
+   ) ; ///  Dark Theme
   static final ThemeData dark = ThemeData(
     brightness: Brightness.dark,
     primarySwatch: Colors.orange,
@@ -130,12 +123,6 @@ class AppTheme {
       backgroundColor: Colors.deepOrange,
       foregroundColor: Colors.white,
     ),
+  ) ;
 
-    cardTheme: CardTheme(
-      color: const Color(0xFF1E1E1E),
-      elevation: 3,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-      shadowColor: Colors.black.withOpacity(0.2),
-    ),
-  );
 }
