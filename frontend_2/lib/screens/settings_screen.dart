@@ -4,6 +4,8 @@ import 'profile_screen.dart';
 import 'faq_screen.dart';
 
 class SettingsScreen extends StatefulWidget {
+  const SettingsScreen({super.key});
+
   @override
   _SettingsScreenState createState() => _SettingsScreenState();
 }
@@ -14,15 +16,15 @@ class _SettingsScreenState extends State<SettingsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFFF5F5F5),
+      backgroundColor: const Color(0xFFF5F5F5),
       appBar: AppBar(
-        backgroundColor: Color(0xFFFF6B35),
+        backgroundColor: const Color(0xFFFF6B35),
         elevation: 0,
         leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: Colors.white),
+          icon: const Icon(Icons.arrow_back, color: Colors.white),
           onPressed: () => Navigator.pop(context),
         ),
-        title: Text(
+        title: const Text(
           'Settings',
           style: TextStyle(
             color: Colors.white,
@@ -36,7 +38,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
           children: [
             Container(
               height: 50,
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 color: Color(0xFFFF6B35),
                 borderRadius: BorderRadius.only(
                   bottomLeft: Radius.circular(30),
@@ -44,9 +46,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 ),
               ),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             Container(
-              margin: EdgeInsets.symmetric(horizontal: 20),
+              margin: const EdgeInsets.symmetric(horizontal: 20),
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(20),
@@ -62,24 +64,24 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 children: [
                   _buildSettingItem(
                     icon: Icons.person_outline,
-                    iconColor: Color(0xFFFF6B35),
-                    iconBgColor: Color(0xFFFFE8E0),
+                    iconColor: const Color(0xFFFF6B35),
+                    iconBgColor: const Color(0xFFFFE8E0),
                     title: 'Personal Information',
                     subtitle: 'Name, email, phone number',
                     onTap: () {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => ProfileScreen(),
+                          builder: (context) => const ProfileScreen(),
                         ),
                       );
                     },
                   ),
-                  Divider(height: 1, indent: 90),
+                  const Divider(height: 1, indent: 90),
                   _buildSettingItemWithSwitch(
                     icon: Icons.notifications_outlined,
-                    iconColor: Color(0xFFFF6B35),
-                    iconBgColor: Color(0xFFFFE8E0),
+                    iconColor: const Color(0xFFFF6B35),
+                    iconBgColor: const Color(0xFFFFE8E0),
                     title: 'Notifications',
                     subtitle: 'Receive notifications',
                     value: notificationsEnabled,
@@ -93,16 +95,16 @@ class _SettingsScreenState extends State<SettingsScreen> {
                                 ? 'Notifications enabled'
                                 : 'Notifications disabled',
                           ),
-                          duration: Duration(seconds: 1),
+                          duration: const Duration(seconds: 1),
                         ),
                       );
                     },
                   ),
-                  Divider(height: 1, indent: 90),
+                  const Divider(height: 1, indent: 90),
                   _buildSettingItem(
                     icon: Icons.help_outline,
-                    iconColor: Color(0xFFFF6B35),
-                    iconBgColor: Color(0xFFFFE8E0),
+                    iconColor: const Color(0xFFFF6B35),
+                    iconBgColor: const Color(0xFFFFE8E0),
                     title: 'FAQ',
                     subtitle: 'Frequently asked questions',
                     onTap: () {
@@ -112,11 +114,11 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       );
                     },
                   ),
-                  Divider(height: 1, indent: 90),
+                  const Divider(height: 1, indent: 90),
                   _buildSettingItem(
                     icon: Icons.logout,
                     iconColor: Colors.red,
-                    iconBgColor: Color(0xFFFFE8E8),
+                    iconBgColor: const Color(0xFFFFE8E8),
                     title: 'Log Out',
                     subtitle: 'Logout from your account',
                     onTap: () => _showLogoutDialog(context),
@@ -125,7 +127,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 ],
               ),
             ),
-            SizedBox(height: 40),
+            const SizedBox(height: 40),
           ],
         ),
       ),
@@ -144,7 +146,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
     return InkWell(
       onTap: onTap,
       child: Padding(
-        padding: EdgeInsets.all(16),
+        padding: const EdgeInsets.all(16),
         child: Row(
           children: [
             Container(
@@ -156,20 +158,20 @@ class _SettingsScreenState extends State<SettingsScreen> {
               ),
               child: Icon(icon, color: iconColor, size: 24),
             ),
-            SizedBox(width: 16),
+            const SizedBox(width: 16),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
                     title,
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.w600,
                       color: Colors.black87,
                     ),
                   ),
-                  SizedBox(height: 4),
+                  const SizedBox(height: 4),
                   Text(
                     subtitle,
                     style: TextStyle(fontSize: 14, color: Colors.grey[600]),
@@ -194,7 +196,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
     required Function(bool) onChanged,
   }) {
     return Padding(
-      padding: EdgeInsets.all(16),
+      padding: const EdgeInsets.all(16),
       child: Row(
         children: [
           Container(
@@ -206,17 +208,17 @@ class _SettingsScreenState extends State<SettingsScreen> {
             ),
             child: Icon(icon, color: iconColor, size: 24),
           ),
-          SizedBox(width: 16),
+          const SizedBox(width: 16),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(title,
-                    style: TextStyle(
+                    style: const TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.w600,
                         color: Colors.black87)),
-                SizedBox(height: 4),
+                const SizedBox(height: 4),
                 Text(subtitle,
                     style: TextStyle(fontSize: 14, color: Colors.grey[600])),
               ],
@@ -225,7 +227,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
           Switch(
             value: value,
             onChanged: onChanged,
-            activeColor: Color(0xFFFF6B35),
+            activeThumbColor: const Color(0xFFFF6B35),
           ),
         ],
       ),
@@ -240,11 +242,11 @@ class _SettingsScreenState extends State<SettingsScreen> {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(20),
           ),
-          title: Text(
+          title: const Text(
             'Log Out',
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
           ),
-          content: Text(
+          content: const Text(
             'Are you sure you want to log out?',
             style: TextStyle(fontSize: 16),
           ),
@@ -263,7 +265,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   (route) => false,
                 );
                 ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(content: Text('Logged out successfully')),
+                  const SnackBar(content: Text('Logged out successfully')),
                 );
               },
               style: ElevatedButton.styleFrom(
@@ -272,7 +274,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   borderRadius: BorderRadius.circular(10),
                 ),
               ),
-              child: Text('Log Out',
+              child: const Text('Log Out',
                   style: TextStyle(fontSize: 16, color: Colors.white)),
             ),
           ],

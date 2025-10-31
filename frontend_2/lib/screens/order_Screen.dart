@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 class OrdersScreen extends StatefulWidget {
+  const OrdersScreen({super.key});
+
   @override
   _OrdersScreenState createState() => _OrdersScreenState();
 }
@@ -69,17 +71,17 @@ class _OrdersScreenState extends State<OrdersScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFFF5F5F5),
+      backgroundColor: const Color(0xFFF5F5F5),
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,
         leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: Colors.black),
+          icon: const Icon(Icons.arrow_back, color: Colors.black),
           onPressed: () {
             Navigator.pop(context);
           },
         ),
-        title: Text(
+        title: const Text(
           'My Orders',
           style: TextStyle(
             color: Colors.black,
@@ -91,7 +93,7 @@ class _OrdersScreenState extends State<OrdersScreen> {
       body: orders.isEmpty
           ? _buildEmptyState()
           : ListView.builder(
-              padding: EdgeInsets.all(16),
+              padding: const EdgeInsets.all(16),
               itemCount: orders.length,
               itemBuilder: (context, index) {
                 return _buildOrderCard(orders[index]);
@@ -107,7 +109,7 @@ class _OrdersScreenState extends State<OrdersScreen> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Icon(Icons.receipt_long_outlined, size: 80, color: Colors.grey[400]),
-          SizedBox(height: 16),
+          const SizedBox(height: 16),
           Text(
             'No Orders Yet',
             style: TextStyle(
@@ -116,7 +118,7 @@ class _OrdersScreenState extends State<OrdersScreen> {
               color: Colors.grey[600],
             ),
           ),
-          SizedBox(height: 8),
+          const SizedBox(height: 8),
           Text(
             'Your orders will appear here',
             style: TextStyle(fontSize: 14, color: Colors.grey[500]),
@@ -129,8 +131,8 @@ class _OrdersScreenState extends State<OrdersScreen> {
   // Order card widget
   Widget _buildOrderCard(Order order) {
     return Container(
-      margin: EdgeInsets.only(bottom: 16),
-      padding: EdgeInsets.all(16),
+      margin: const EdgeInsets.only(bottom: 16),
+      padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(16),
@@ -155,13 +157,13 @@ class _OrdersScreenState extends State<OrdersScreen> {
                   children: [
                     Text(
                       order.restaurantName,
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
                         color: Colors.black87,
                       ),
                     ),
-                    SizedBox(height: 4),
+                    const SizedBox(height: 4),
                     Text(
                       order.date,
                       style: TextStyle(fontSize: 14, color: Colors.grey[600]),
@@ -173,7 +175,7 @@ class _OrdersScreenState extends State<OrdersScreen> {
             ],
           ),
 
-          Divider(height: 24),
+          const Divider(height: 24),
 
           // Meal details
           Row(
@@ -183,18 +185,18 @@ class _OrdersScreenState extends State<OrdersScreen> {
                 width: 80,
                 height: 80,
                 decoration: BoxDecoration(
-                  color: Color(0xFFFFE8E0),
+                  color: const Color(0xFFFFE8E0),
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: order.mealImage.isEmpty
-                    ? Icon(Icons.restaurant, size: 40, color: Color(0xFFFF6B35))
+                    ? const Icon(Icons.restaurant, size: 40, color: Color(0xFFFF6B35))
                     : ClipRRect(
                         borderRadius: BorderRadius.circular(12),
                         child: Image.network(
                           order.mealImage,
                           fit: BoxFit.cover,
                           errorBuilder: (context, error, stackTrace) {
-                            return Icon(
+                            return const Icon(
                               Icons.restaurant,
                               size: 40,
                               color: Color(0xFFFF6B35),
@@ -204,7 +206,7 @@ class _OrdersScreenState extends State<OrdersScreen> {
                       ),
               ),
 
-              SizedBox(width: 16),
+              const SizedBox(width: 16),
 
               // Meal info
               Expanded(
@@ -213,21 +215,21 @@ class _OrdersScreenState extends State<OrdersScreen> {
                   children: [
                     Text(
                       order.mealName,
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.w600,
                         color: Colors.black87,
                       ),
                     ),
-                    SizedBox(height: 4),
+                    const SizedBox(height: 4),
                     Text(
                       order.mealCategory,
                       style: TextStyle(fontSize: 14, color: Colors.grey[600]),
                     ),
-                    SizedBox(height: 8),
+                    const SizedBox(height: 8),
                     Text(
                       '\$${order.price.toStringAsFixed(2)}',
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
                         color: Color(0xFFFF6B35),
@@ -262,27 +264,27 @@ class _OrdersScreenState extends State<OrdersScreen> {
 
     switch (status) {
       case OrderStatus.accepted:
-        bgColor = Color(0xFFE8F5E9);
-        textColor = Color(0xFF2E7D32);
+        bgColor = const Color(0xFFE8F5E9);
+        textColor = const Color(0xFF2E7D32);
         text = 'Accepted';
         icon = Icons.check_circle_outline;
         break;
       case OrderStatus.pending:
-        bgColor = Color(0xFFFFF3E0);
-        textColor = Color(0xFFE65100);
+        bgColor = const Color(0xFFFFF3E0);
+        textColor = const Color(0xFFE65100);
         text = 'Pending';
         icon = Icons.access_time;
         break;
       case OrderStatus.refused:
-        bgColor = Color(0xFFFFEBEE);
-        textColor = Color(0xFFC62828);
+        bgColor = const Color(0xFFFFEBEE);
+        textColor = const Color(0xFFC62828);
         text = 'Refused';
         icon = Icons.cancel_outlined;
         break;
     }
 
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
       decoration: BoxDecoration(
         color: bgColor,
         borderRadius: BorderRadius.circular(20),
@@ -291,7 +293,7 @@ class _OrdersScreenState extends State<OrdersScreen> {
         mainAxisSize: MainAxisSize.min,
         children: [
           Icon(icon, size: 16, color: textColor),
-          SizedBox(width: 4),
+          const SizedBox(width: 4),
           Text(
             text,
             style: TextStyle(

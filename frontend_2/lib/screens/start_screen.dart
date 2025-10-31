@@ -16,7 +16,7 @@ class FirstScreen extends StatefulWidget {
 class _FirstScreenState extends State<FirstScreen> {
   int _selectedIndex = 0;
 
-  final List<Widget> _screens = [
+  final List<Widget> _screens =  const [
     // i remouved const from here because i have a statfull widget
     HomeScreen(),
     AddMealScreen(),

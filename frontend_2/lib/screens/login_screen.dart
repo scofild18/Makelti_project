@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'register.dart';
 
 class LoginScreen extends StatefulWidget {
+  const LoginScreen({super.key});
+
   @override
   _LoginScreenState createState() => _LoginScreenState();
 }
@@ -61,15 +63,13 @@ class _LoginScreenState extends State<LoginScreen> {
   // Login method
   void handleLogin() {
     if (_formKey.currentState!.validate()) {
-      String email = _emailController.text.trim();
-      String password = _passwordController.text;
+      // String email = _emailController.text.trim();
+      // String password = _passwordController.text;
 
-      print('Login - Email: $email, Password: $password');
 
-      // TODO: Add your backend authentication here
 
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
+        const SnackBar(
           content: Text('Login successful!'),
           backgroundColor: Colors.green,
         ),
@@ -84,7 +84,7 @@ class _LoginScreenState extends State<LoginScreen> {
       body: SafeArea(
         child: Center(
           child: SingleChildScrollView(
-            padding: EdgeInsets.all(24),
+            padding: const EdgeInsets.all(24),
             child: Form(
               key: _formKey,
               child: Column(
@@ -95,7 +95,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     width: 100,
                     height: 100,
                     decoration: BoxDecoration(
-                      color: Color(0xFFFF6B35),
+                      color: const Color(0xFFFF6B35),
                       shape: BoxShape.circle,
                       boxShadow: [
                         BoxShadow(
@@ -105,17 +105,17 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                       ],
                     ),
-                    child: Icon(
+                    child: const Icon(
                       Icons.restaurant_menu,
                       size: 50,
                       color: Colors.white,
                     ),
                   ),
 
-                  SizedBox(height: 24),
+                  const SizedBox(height: 24),
 
                   // Title
-                  Text(
+                  const Text(
                     'Makelti',
                     style: TextStyle(
                       fontSize: 40,
@@ -124,7 +124,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                   ),
 
-                  SizedBox(height: 8),
+                  const SizedBox(height: 8),
 
                   // Subtitle
                   Text(
@@ -132,7 +132,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     style: TextStyle(fontSize: 16, color: Colors.grey[600]),
                   ),
 
-                  SizedBox(height: 40),
+                  const SizedBox(height: 40),
 
                   // Login/Register Tabs
                   Container(
@@ -150,7 +150,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               });
                             },
                             child: Container(
-                              padding: EdgeInsets.symmetric(vertical: 16),
+                              padding: const EdgeInsets.symmetric(vertical: 16),
                               decoration: BoxDecoration(
                                 color: isLoginSelected
                                     ? Colors.white
@@ -190,12 +190,12 @@ class _LoginScreenState extends State<LoginScreen> {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => RegisterScreen(),
+                                  builder: (context) => const RegisterScreen(),
                                 ),
                               );
                             },
                             child: Container(
-                              padding: EdgeInsets.symmetric(vertical: 16),
+                              padding: const EdgeInsets.symmetric(vertical: 16),
                               decoration: BoxDecoration(
                                 color: !isLoginSelected
                                     ? Colors.white
@@ -232,10 +232,10 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                   ),
 
-                  SizedBox(height: 32),
+                  const SizedBox(height: 32),
 
                   // Email Field
-                  Align(
+                  const Align(
                     alignment: Alignment.centerLeft,
                     child: Text(
                       'Email',
@@ -243,7 +243,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                   ),
 
-                  SizedBox(height: 8),
+                  const SizedBox(height: 8),
 
                   TextFormField(
                     controller: _emailController,
@@ -260,23 +260,23 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                       errorBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(12),
-                        borderSide: BorderSide(color: Colors.red, width: 1),
+                        borderSide: const BorderSide(color: Colors.red, width: 1),
                       ),
                       focusedErrorBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(12),
-                        borderSide: BorderSide(color: Colors.red, width: 1),
+                        borderSide: const BorderSide(color: Colors.red, width: 1),
                       ),
-                      contentPadding: EdgeInsets.symmetric(
+                      contentPadding: const EdgeInsets.symmetric(
                         horizontal: 20,
                         vertical: 16,
                       ),
                     ),
                   ),
 
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
 
                   // Password Field
-                  Align(
+                  const Align(
                     alignment: Alignment.centerLeft,
                     child: Text(
                       'Password',
@@ -284,7 +284,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                   ),
 
-                  SizedBox(height: 8),
+                  const SizedBox(height: 8),
 
                   TextFormField(
                     controller: _passwordController,
@@ -301,13 +301,13 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                       errorBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(12),
-                        borderSide: BorderSide(color: Colors.red, width: 1),
+                        borderSide: const BorderSide(color: Colors.red, width: 1),
                       ),
                       focusedErrorBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(12),
-                        borderSide: BorderSide(color: Colors.red, width: 1),
+                        borderSide: const BorderSide(color: Colors.red, width: 1),
                       ),
-                      contentPadding: EdgeInsets.symmetric(
+                      contentPadding: const EdgeInsets.symmetric(
                         horizontal: 20,
                         vertical: 16,
                       ),
@@ -327,7 +327,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                   ),
 
-                  SizedBox(height: 32),
+                  const SizedBox(height: 32),
 
                   // Login Button
                   SizedBox(
@@ -335,14 +335,14 @@ class _LoginScreenState extends State<LoginScreen> {
                     child: ElevatedButton(
                       onPressed: handleLogin,
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: Color(0xFFFF6B35),
-                        padding: EdgeInsets.symmetric(vertical: 16),
+                        backgroundColor: const Color(0xFFFF6B35),
+                        padding: const EdgeInsets.symmetric(vertical: 16),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(30),
                         ),
                         elevation: 0,
                       ),
-                      child: Text(
+                      child: const Text(
                         'Login',
                         style: TextStyle(
                           fontSize: 18,
@@ -353,7 +353,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                   ),
 
-                  SizedBox(height: 40),
+                  const SizedBox(height: 40),
 
                   // Quick Demo Access
                   Text(
@@ -361,7 +361,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     style: TextStyle(fontSize: 14, color: Colors.grey[600]),
                   ),
 
-                  SizedBox(height: 16),
+                  const SizedBox(height: 16),
 
                   // Demo Buttons
                   Row(
@@ -372,16 +372,16 @@ class _LoginScreenState extends State<LoginScreen> {
                             print('Demo ');
                             ScaffoldMessenger.of(
                               context,
-                            ).showSnackBar(SnackBar(content: Text('Demo ')));
+                            ).showSnackBar(const SnackBar(content: Text('Demo ')));
                           },
                           style: OutlinedButton.styleFrom(
-                            padding: EdgeInsets.symmetric(vertical: 16),
+                            padding: const EdgeInsets.symmetric(vertical: 16),
                             side: BorderSide(color: Colors.grey[300]!),
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(12),
                             ),
                           ),
-                          child: Text(
+                          child: const Text(
                             'Demo ',
                             style: TextStyle(
                               fontSize: 16,
@@ -391,7 +391,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                       ),
 
-                      SizedBox(width: 16),
+                      const SizedBox(width: 16),
 
                       // Expanded(
                       //   child: OutlinedButton(

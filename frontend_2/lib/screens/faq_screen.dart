@@ -39,23 +39,25 @@ class FAQScreen extends StatelessWidget {
     },
   ];
 
+   FAQScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor: Color(0xFFFF6B35),
+        backgroundColor: const Color(0xFFFF6B35),
         elevation: 0,
         leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: Colors.white),
+          icon: const Icon(Icons.arrow_back, color: Colors.white),
           onPressed: () {
             Navigator.pop(context);
           },
         ),
-        title: Text('FAQ', style: TextStyle(color: Colors.white)),
+        title: const Text('FAQ', style: TextStyle(color: Colors.white)),
       ),
       body: ListView.builder(
-        padding: EdgeInsets.all(20),
+        padding: const EdgeInsets.all(20),
         itemCount: faqs.length,
         itemBuilder: (context, index) {
           return _buildFAQItem(
@@ -69,7 +71,7 @@ class FAQScreen extends StatelessWidget {
 
   Widget _buildFAQItem({required String question, required String answer}) {
     return Container(
-      margin: EdgeInsets.only(bottom: 16),
+      margin: const EdgeInsets.only(bottom: 16),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(12),
@@ -78,10 +80,10 @@ class FAQScreen extends StatelessWidget {
       child: Theme(
         data: ThemeData(dividerColor: Colors.transparent),
         child: ExpansionTile(
-          tilePadding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+          tilePadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
           title: Text(
             question,
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.w600,
               color: Colors.black87,
@@ -90,15 +92,15 @@ class FAQScreen extends StatelessWidget {
           leading: Container(
             width: 40,
             height: 40,
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               color: Color(0xFFFFE8E0),
               shape: BoxShape.circle,
             ),
-            child: Icon(Icons.help_outline, color: Color(0xFFFF6B35), size: 20),
+            child: const Icon(Icons.help_outline, color: Color(0xFFFF6B35), size: 20),
           ),
           children: [
             Padding(
-              padding: EdgeInsets.fromLTRB(72, 0, 16, 16),
+              padding: const EdgeInsets.fromLTRB(72, 0, 16, 16),
               child: Text(
                 answer,
                 style: TextStyle(
