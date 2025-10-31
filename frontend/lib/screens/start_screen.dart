@@ -12,7 +12,7 @@ class FirstScreen extends StatefulWidget {
 }
 
 class _FirstScreenState extends State<FirstScreen> {
-  int _selectedIndex = 0;
+int _selectedIndex = 0;
 
   final List<Widget> _screens = const [
     HomeScreen(),
@@ -46,10 +46,10 @@ class _FirstScreenState extends State<FirstScreen> {
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.lunch_dining),
-            label: 'Lunch',
+            label: 'add meal',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.person),
+            icon: Icon(Icons.rounded_corner),
             label: 'Profile',
           ),
         ],

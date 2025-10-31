@@ -11,6 +11,7 @@ class _AddMealScreenState extends State<AddMealScreen> {
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
+      backgroundColor: Color.fromARGB(255, 254, 251, 246) ,
       body: SafeArea(child: 
       Column(
         children: [
