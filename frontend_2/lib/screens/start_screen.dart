@@ -2,7 +2,9 @@ import 'add_meal_screen.dart';
 import 'add_orders_screen.dart';
 import 'home_screen.dart';
 import 'package:flutter/material.dart';
-
+import 'profile_screen.dart';
+import 'faq_screen.dart';
+import 'settings_screen.dart';
 
 class FirstScreen extends StatefulWidget {
   const FirstScreen({super.key});
@@ -12,12 +14,14 @@ class FirstScreen extends StatefulWidget {
 }
 
 class _FirstScreenState extends State<FirstScreen> {
-int _selectedIndex = 0;
+  int _selectedIndex = 0;
 
-  final List<Widget> _screens = const [
+  final List<Widget> _screens =  const [
+    // i remouved const from here because i have a statfull widget
     HomeScreen(),
     AddMealScreen(),
-    AddOrdersScreen(),
+    ProfileScreen(),
+    SettingsScreen(),
   ];
 
   void _onItemTapped(int index) {
@@ -49,8 +53,12 @@ int _selectedIndex = 0;
             label: 'add meal',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.rounded_corner),
+            icon: Icon(Icons.person),
             label: 'Profile',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.settings),
+            label: 'Settings',
           ),
         ],
       ),
