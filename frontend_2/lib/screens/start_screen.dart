@@ -1,9 +1,7 @@
 import 'add_meal_screen.dart';
-import 'add_orders_screen.dart';
 import 'home_screen.dart';
 import 'package:flutter/material.dart';
 import 'profile_screen.dart';
-import 'faq_screen.dart';
 import 'settings_screen.dart';
 
 class FirstScreen extends StatefulWidget {
