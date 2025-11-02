@@ -1,8 +1,8 @@
 import 'add_meal_screen.dart';
-import 'add_orders_screen.dart';
 import 'home_screen.dart';
 import 'package:flutter/material.dart';
-
+import 'profile_screen.dart';
+import 'settings_screen.dart';
 
 class FirstScreen extends StatefulWidget {
   const FirstScreen({super.key});
@@ -12,7 +12,7 @@ class FirstScreen extends StatefulWidget {
 }
 
 class _FirstScreenState extends State<FirstScreen> {
-int _selectedIndex = 0;
+  int _selectedIndex = 0;
 
   void _onItemTapped(int index) {
     setState(() {
@@ -23,7 +23,8 @@ int _selectedIndex = 0;
   List<Widget> get _screens => [
     const HomeScreen(),
     AddMealScreen(onBackPressed: () => _onItemTapped(0)),
-    const AddOrdersScreen(),
+    const ProfileScreen(),
+    const SettingsScreen(),
   ];
 
   @override
@@ -49,8 +50,12 @@ int _selectedIndex = 0;
             label: 'add meal',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.rounded_corner),
+            icon: Icon(Icons.person),
             label: 'Profile',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.settings),
+            label: 'Settings',
           ),
         ],
       ),
