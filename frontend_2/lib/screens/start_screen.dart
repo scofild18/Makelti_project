@@ -1,6 +1,9 @@
+import 'package:Makelti/screens/home_screen.dart';
+import 'package:Makelti/screens/orders_management.dart';
+
 import 'add_meal_screen.dart';
 import 'add_orders_screen.dart';
-import 'home_screen.dart';
+
 import 'package:flutter/material.dart';
 
 
@@ -16,7 +19,7 @@ int _selectedIndex = 0;
 
   final List<Widget> _screens = const [
     HomeScreen(),
-    AddMealScreen(),
+    OrdersManagement(),
     AddOrdersScreen(),
   ];
 

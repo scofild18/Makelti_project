@@ -2,10 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class AppTheme {
+  /// Light Theme
   static final ThemeData light = ThemeData(
     brightness: Brightness.light,
     primarySwatch: Colors.orange,
     scaffoldBackgroundColor: const Color(0xFFFEFBF6),
+
+    fontFamily: GoogleFonts.poppins().fontFamily,
 
     textTheme: GoogleFonts.poppinsTextTheme().copyWith(
       displayLarge: const TextStyle(
@@ -53,7 +56,7 @@ class AppTheme {
         backgroundColor: Colors.deepOrange,
         foregroundColor: Colors.white,
         textStyle: const TextStyle(fontWeight: FontWeight.bold),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+        shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(8))),
       ),
     ),
 
@@ -61,13 +64,15 @@ class AppTheme {
       backgroundColor: Colors.deepOrange,
       foregroundColor: Colors.white,
     ),
+  );
 
-
-   ) ; ///  Dark Theme
+  /// Dark Theme
   static final ThemeData dark = ThemeData(
     brightness: Brightness.dark,
     primarySwatch: Colors.orange,
     scaffoldBackgroundColor: const Color(0xFF121212),
+
+    fontFamily: GoogleFonts.poppins().fontFamily,
 
     textTheme: GoogleFonts.poppinsTextTheme().copyWith(
       displayLarge: const TextStyle(
@@ -115,7 +120,7 @@ class AppTheme {
         backgroundColor: Colors.deepOrange,
         foregroundColor: Colors.white,
         textStyle: const TextStyle(fontWeight: FontWeight.bold),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+        shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(8))),
       ),
     ),
 
@@ -123,6 +128,5 @@ class AppTheme {
       backgroundColor: Colors.deepOrange,
       foregroundColor: Colors.white,
     ),
-  ) ;
-
+  );
 }
