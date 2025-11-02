@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-class KitchenProfile extends StatefulWidget {
-  const KitchenProfile({super.key});
+class CookProfile extends StatefulWidget {
+  const CookProfile({super.key});
 
   @override
-  State<KitchenProfile> createState() => _KitchenProfileState();
+  State<CookProfile> createState() => _CookProfileState();
 }
 
-class _KitchenProfileState extends State<KitchenProfile> with SingleTickerProviderStateMixin {
+class _CookProfileState extends State<CookProfile> with SingleTickerProviderStateMixin {
   int _selectedIndex = 0;
   int _selectedTab = 0; // 0 for Recent Posts, 1 for History
   bool _isEditing = false;

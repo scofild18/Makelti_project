@@ -1,5 +1,5 @@
-import 'package:Makelti/screens/kitchen_profile.dart';
-import 'package:Makelti/screens/user_kitchen_profile.dart';
+import 'package:Makelti/screens/cook_profile.dart';
+import 'package:Makelti/screens/user_cook_profile.dart';
 import 'package:Makelti/screens/user_profile.dart';
 
 import 'screens/start_screen.dart';
@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
       title: 'Makelti',
        theme: AppTheme.light,
       darkTheme: AppTheme.dark,
-      home: const FirstScreen() 
+      home: const UserCookProfile() 
     );
   }
 }

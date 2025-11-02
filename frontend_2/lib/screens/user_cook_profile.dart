@@ -1,18 +1,15 @@
 import 'package:flutter/material.dart';
 
-class UserKitchenProfile extends StatefulWidget {
-  const UserKitchenProfile({super.key});
+class UserCookProfile extends StatefulWidget {
+  const UserCookProfile({super.key});
 
   @override
-  State<UserKitchenProfile> createState() => _UserKitchenProfileState();
+  State<UserCookProfile> createState() => _UserCookProfileState();
 }
 
-class _UserKitchenProfileState extends State<UserKitchenProfile> with SingleTickerProviderStateMixin {
+class _UserCookProfileState extends State<UserCookProfile> with SingleTickerProviderStateMixin {
   int _selectedIndex = 0;
   int _selectedTab = 0; // 0 for Recent Posts, 1 for History
-  bool _isEditing = false;
-  final TextEditingController _nameController = TextEditingController(text: "Maria's Kitchen");
-  final TextEditingController _locationController = TextEditingController(text: "Downtown, City Center");
   late AnimationController _tabAnimationController;
   Animation<double>? _fadeAnimation;
   Animation<Offset>? _slideAnimation;
@@ -43,16 +40,8 @@ class _UserKitchenProfileState extends State<UserKitchenProfile> with SingleTick
 
   @override
   void dispose() {
-    _nameController.dispose();
-    _locationController.dispose();
     _tabAnimationController.dispose();
     super.dispose();
-  }
-
-  void _toggleEditMode() {
-    setState(() {
-      _isEditing = !_isEditing;
-    });
   }
 
   void _switchTab(int newTab) {
@@ -91,179 +80,61 @@ class _UserKitchenProfileState extends State<UserKitchenProfile> with SingleTick
               child: SafeArea(
                 child: Column(
                   children: [
-                    // Edit button
                     const SizedBox(height: 15),
                     // Profile Image
-                    Stack(
-                      children: [
-                        Container(
-                          width: 90,
-                          height: 90,
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            border: Border.all(
-                              color: Colors.white.withValues(alpha: 0.3),
-                              width: 3,
-                            ),
-                          ),
-                          child: CircleAvatar(
-                            backgroundColor: Colors.white.withValues(alpha: 0.2),
-                            child: Icon(
-                              Icons.person,
-                              size: 50,
-                              color: Colors.white.withValues(alpha: 0.6),
-                            ),
-                          ),
+                    Container(
+                      width: 90,
+                      height: 90,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        border: Border.all(
+                          color: Colors.white.withValues(alpha: 0.3),
+                          width: 3,
                         ),
-                        if (_isEditing)
-                          Positioned(
-                            bottom: 0,
-                            right: 0,
-                            child: GestureDetector(
-                              onTap: () {
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  const SnackBar(
-                                    content: Text('Image picker would open here'),
-                                    duration: Duration(seconds: 2),
-                                    backgroundColor: Color(0xFFFF7043),
-                                  ),
-                                );
-                              },
-                              child: Container(
-                                width: 32,
-                                height: 32,
-                                decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  shape: BoxShape.circle,
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: Colors.black.withValues(alpha: 0.2),
-                                      blurRadius: 8,
-                                      offset: const Offset(0, 2),
-                                    ),
-                                  ],
-                                ),
-                                child: const Icon(
-                                  Icons.camera_alt,
-                                  size: 16,
-                                  color: Color(0xFFFF6B35),
-                                ),
-                              ),
-                            ),
-                          ),
-                      ],
+                      ),
+                      child: CircleAvatar(
+                        backgroundColor: Colors.white.withValues(alpha: 0.2),
+                        child: Icon(
+                          Icons.person,
+                          size: 50,
+                          color: Colors.white.withValues(alpha: 0.6),
+                        ),
+                      ),
                     ),
                     
                     const SizedBox(height: 12),
                     
-                    // Restaurant Name - Editable
-                    if (_isEditing)
-                      SizedBox(
-                        width: 250,
-                        child: TextField(
-                          controller: _nameController,
-                          textAlign: TextAlign.center,
-                          style: const TextStyle(
-                            color: Colors.white,
-                            fontSize: 24,
-                            fontWeight: FontWeight.bold,
-                          ),
-                          decoration: InputDecoration(
-                            hintText: "Enter name",
-                            hintStyle: TextStyle(
-                              color: Colors.white.withValues(alpha: 0.7),
-                            ),
-                            enabledBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(
-                                color: Colors.white.withValues(alpha: 0.5),
-                                width: 2,
-                              ),
-                            ),
-                            focusedBorder: const UnderlineInputBorder(
-                              borderSide: BorderSide(
-                                color: Colors.white,
-                                width: 2,
-                              ),
-                            ),
-                            contentPadding: const EdgeInsets.symmetric(vertical: 8),
-                          ),
-                        ),
-                      )
-                    else
-                      Text(
-                        _nameController.text,
-                        style: const TextStyle(
-                          color: Colors.white,
-                          fontSize: 24,
-                          fontWeight: FontWeight.bold,
-                        ),
+                    // Restaurant Name
+                    const Text(
+                      "Maria's Kitchen",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
                       ),
+                    ),
                     
                     const SizedBox(height: 6),
                     
-                    // Location - Editable
-                    if (_isEditing)
-                      SizedBox(
-                        width: 250,
-                        child: TextField(
-                          controller: _locationController,
-                          textAlign: TextAlign.center,
-                          style: const TextStyle(
+                    // Location
+                    const Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(
+                          Icons.location_on_outlined,
+                          color: Colors.white,
+                          size: 16,
+                        ),
+                        SizedBox(width: 4),
+                        Text(
+                          "Downtown, City Center",
+                          style: TextStyle(
                             color: Colors.white,
                             fontSize: 14,
                           ),
-                          decoration: InputDecoration(
-                            prefixIcon: const Padding(
-                              padding: EdgeInsets.only(right: 4),
-                              child: Icon(
-                                Icons.location_on_outlined,
-                                color: Colors.white,
-                                size: 16,
-                              ),
-                            ),
-                            prefixIconConstraints: const BoxConstraints(
-                              minWidth: 20,
-                              minHeight: 16,
-                            ),
-                            hintText: "Enter location",
-                            hintStyle: TextStyle(
-                              color: Colors.white.withValues(alpha: 0.7),
-                            ),
-                            enabledBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(
-                                color: Colors.white.withValues(alpha: 0.5),
-                                width: 2,
-                              ),
-                            ),
-                            focusedBorder: const UnderlineInputBorder(
-                              borderSide: BorderSide(
-                                color: Colors.white,
-                                width: 2,
-                              ),
-                            ),
-                            contentPadding: const EdgeInsets.symmetric(vertical: 8),
-                          ),
                         ),
-                      )
-                    else
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          const Icon(
-                            Icons.location_on_outlined,
-                            color: Colors.white,
-                            size: 16,
-                          ),
-                          const SizedBox(width: 4),
-                          Text(
-                            _locationController.text,
-                            style: const TextStyle(
-                              color: Colors.white,
-                              fontSize: 14,
-                            ),
-                          ),
-                        ],
-                      ),
+                      ],
+                    ),
                     
                     const SizedBox(height: 10),
                     
