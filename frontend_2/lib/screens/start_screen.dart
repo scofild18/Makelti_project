@@ -14,17 +14,17 @@ class FirstScreen extends StatefulWidget {
 class _FirstScreenState extends State<FirstScreen> {
 int _selectedIndex = 0;
 
-  final List<Widget> _screens = const [
-    HomeScreen(),
-    AddMealScreen(),
-    AddOrdersScreen(),
-  ];
-
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
     });
   }
+
+  List<Widget> get _screens => [
+    const HomeScreen(),
+    AddMealScreen(onBackPressed: () => _onItemTapped(0)),
+    const AddOrdersScreen(),
+  ];
 
   @override
   Widget build(BuildContext context) {

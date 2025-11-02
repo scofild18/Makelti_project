@@ -5,7 +5,9 @@ import '../widgets/add_meal_screen/category_chip.dart';
 import '../widgets/add_meal_screen/submit_button.dart';
 
 class AddMealScreen extends StatefulWidget {
-  const AddMealScreen({super.key});
+  const AddMealScreen({super.key, this.onBackPressed});
+
+  final VoidCallback? onBackPressed;
 
   @override
   State<AddMealScreen> createState() => _AddMealScreenState();
@@ -108,7 +110,12 @@ class _AddMealScreenState extends State<AddMealScreen> {
                 children: [
                   IconButton(
                     icon: const Icon(Icons.arrow_back),
-                    onPressed: () => Navigator.pop(context),
+                    onPressed: widget.onBackPressed ?? () {
+                      // Fallback if no callback provided
+                      if (Navigator.canPop(context)) {
+                        Navigator.pop(context);
+                      }
+                    },
                   ),
                   const SizedBox(width: 8),
                   const Text(
@@ -174,7 +181,7 @@ class _AddMealScreenState extends State<AddMealScreen> {
                     // Price
                     CustomTextField(
                       label: 'Price',
-                      hint: '\$ 0.00',
+                      hint: 'DZD 0.00',
                       controller: _priceController,
                       keyboardType: TextInputType.number,
                       prefixIcon: Icons.attach_money,
