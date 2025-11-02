@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'register.dart';
+import 'home_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -373,10 +374,15 @@ class _LoginScreenState extends State<LoginScreen> {
                         child: OutlinedButton(
                           onPressed: () {
                             print('Demo ');
-                            ScaffoldMessenger.of(
+
+                            // Navigate to home screen
+                            Navigator.pushAndRemoveUntil(
                               context,
-                            ).showSnackBar(
-                                const SnackBar(content: Text('Demo ')));
+                              MaterialPageRoute(
+                                builder: (context) => const HomeScreen(),
+                              ),
+                              (route) => false,
+                            );
                           },
                           style: OutlinedButton.styleFrom(
                             padding: const EdgeInsets.symmetric(vertical: 16),
