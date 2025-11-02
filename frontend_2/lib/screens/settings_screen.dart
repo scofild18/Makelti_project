@@ -1,3 +1,4 @@
+import 'package:Makelti/screens/start_screen.dart';
 import 'package:flutter/material.dart';
 import 'login_screen.dart';
 import 'profile_screen.dart';
@@ -26,7 +27,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
           onPressed: () {
             Navigator.pushAndRemoveUntil(
               context,
-              MaterialPageRoute(builder: (context) => const HomeScreen()),
+              MaterialPageRoute(builder: (context) => const FirstScreen()),
               (route) => false,
             );
           },

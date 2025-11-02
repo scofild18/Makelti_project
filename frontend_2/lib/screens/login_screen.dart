@@ -1,3 +1,4 @@
+import 'package:Makelti/screens/start_screen.dart';
 import 'package:flutter/material.dart';
 import 'register.dart';
 import 'home_screen.dart';
@@ -379,7 +380,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             Navigator.pushAndRemoveUntil(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => const HomeScreen(),
+                                builder: (context) => const FirstScreen(),
                               ),
                               (route) => false,
                             );
