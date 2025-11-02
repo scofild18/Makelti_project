@@ -2,6 +2,7 @@ import '../widgets/home_screen/food_card.dart';
 import '../widgets/home_screen/nearby_stores_card.dart';
 import '../widgets/home_screen/search_bar.dart';
 import 'package:flutter/material.dart';
+import 'meal_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -121,6 +122,12 @@ class _HomeScreenState extends State<HomeScreen> {
                             store: item['store'],
                             rating: item['rating'].toDouble(),
                             distance: item['distance'],
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (_) => const FoodDetailPage()),
+                              );
+                            },
                           );
                   },
                 ),
@@ -149,6 +156,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   padding: const EdgeInsets.symmetric(horizontal: 12),
                   child: ListView.builder(
                     scrollDirection: Axis.horizontal,
+                    
                     itemCount: nearbyStores.length,
                     itemBuilder: (context, index) {
                       final store = nearbyStores[index];
