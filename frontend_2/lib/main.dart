@@ -1,4 +1,4 @@
-import 'screens/start_screen.dart';
+import 'screens/splash_screen.dart';
 import 'utils/application_theme.dart';
 import 'package:flutter/material.dart';
 
@@ -15,6 +15,6 @@ class MyApp extends StatelessWidget {
         title: 'Makelti',
         theme: AppTheme.light,
         darkTheme: AppTheme.dark,
-        home: const FirstScreen());
+        home: const SplashScreen());
   }
 }
