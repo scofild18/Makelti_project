@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:Makelti/screens/start_screen.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -37,6 +38,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
           icon: const Icon(Icons.arrow_back, color: Colors.white),
           onPressed: () {
             Navigator.pop(context);
+            Navigator.pushAndRemoveUntil(
+              context,
+              MaterialPageRoute(builder: (context) => const FirstScreen()),
+              (route) => false,
+            );
           },
         ),
         title: const Text(
@@ -60,7 +66,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     shape: BoxShape.circle,
                     color: Color(0xFFFFE8E0),
                   ),
-                  child: const Icon(Icons.person, size: 60, color: Color(0xFFFF6B35)),
+                  child: const Icon(Icons.person,
+                      size: 60, color: Color(0xFFFF6B35)),
                 ),
                 Positioned(
                   bottom: 0,
@@ -178,10 +185,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
               borderRadius: BorderRadius.circular(12),
               borderSide: BorderSide.none,
             ),
-            contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+            contentPadding:
+                const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
           ),
         ),
       ],
     );
   }
 }
+
