@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'dart:async';
 import 'start_screen.dart';
 
@@ -63,24 +64,11 @@ class _SplashScreenState extends State<SplashScreen>
     _animationController.forward();
 
     // Navigate to FirstScreen after delay
-    Timer(const Duration(seconds: 3), () {
-      if (mounted) {
-        Navigator.of(context).pushReplacement(
-          PageRouteBuilder(
-            pageBuilder: (context, animation, secondaryAnimation) =>
-                const FirstScreen(),
-            transitionsBuilder:
-                (context, animation, secondaryAnimation, child) {
-              return FadeTransition(
-                opacity: animation,
-                child: child,
-              );
-            },
-            transitionDuration: const Duration(milliseconds: 500),
-          ),
-        );
-      }
-    });
+   Timer(const Duration(seconds: 3), () {
+  if (mounted) {
+    context.go('/home'); // or whichever route you want
+  }
+});
   }
 
   @override

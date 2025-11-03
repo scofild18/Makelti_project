@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'start_screen.dart';
 
 class RegisterScreen extends StatefulWidget {
@@ -407,11 +408,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     ),
                     GestureDetector(
                       onTap: () {
-                        Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const FirstScreen()),
-                        );
+                        context.go("/home");
                       },
                       child: const Text(
                         'Login',

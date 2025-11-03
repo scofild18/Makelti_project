@@ -104,21 +104,13 @@ class _AddMealScreenState extends State<AddMealScreen> {
         child: Column(
           children: [
             // Header
-            Padding(
-              padding: const EdgeInsets.all(16.0),
+            const Padding(
+              padding: EdgeInsets.all(16.0),
               child: Row(
                 children: [
-                  IconButton(
-                    icon: const Icon(Icons.arrow_back),
-                    onPressed: widget.onBackPressed ?? () {
-                      // Fallback if no callback provided
-                      if (Navigator.canPop(context)) {
-                        Navigator.pop(context);
-                      }
-                    },
-                  ),
-                  const SizedBox(width: 8),
-                  const Text(
+                
+                  SizedBox(width: 8),
+                  Text(
                     'Add New Meal',
                     style: TextStyle(
                       fontSize: 20,

@@ -1,62 +1,48 @@
-import 'add_meal_screen.dart';
-import 'home_screen.dart';
 import 'package:flutter/material.dart';
-import 'profile_screen.dart';
-import 'settings_screen.dart';
+import 'package:go_router/go_router.dart';
 
-class FirstScreen extends StatefulWidget {
-  const FirstScreen({super.key});
+class FirstScreen extends StatelessWidget {
+  final Widget child;
+  const FirstScreen({super.key, required this.child});
 
-  @override
-  State<FirstScreen> createState() => _FirstScreenState();
-}
+  // Define your tab routes
+  static const List<String> _tabs = [
+    '/home',
+    '/add_meal',
+    '/orders',
+    '/settings',
+  ];
 
-class _FirstScreenState extends State<FirstScreen> {
-  int _selectedIndex = 0;
-
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
+  int _calculateSelectedIndex(BuildContext context) {
+    final location = GoRouterState.of(context).uri.toString();
+    if (location.startsWith('/add_meal')) return 1;
+    if (location.startsWith('/orders')) return 2;
+    if (location.startsWith('/settings')) return 3;
+    return 0;
   }
 
-  List<Widget> get _screens => [
-    const HomeScreen(),
-    AddMealScreen(onBackPressed: () => _onItemTapped(0)),
-    const ProfileScreen(),
-    const SettingsScreen(),
-  ];
+  void _onItemTapped(BuildContext context, int index) {
+    context.go(_tabs[index]);
+  }
 
   @override
   Widget build(BuildContext context) {
+    final selectedIndex = _calculateSelectedIndex(context);
+
     return Scaffold(
-      body: SafeArea(
-        child: _screens[_selectedIndex],
-      ),
+      body: SafeArea(child: child),
       bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _selectedIndex,
-        onTap: _onItemTapped,
+        currentIndex: selectedIndex,
+        onTap: (index) => _onItemTapped(context, index),
         backgroundColor: Colors.white,
         selectedItemColor: Colors.orange,
         unselectedItemColor: Colors.grey,
         showUnselectedLabels: true,
         items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.lunch_dining),
-            label: 'add meal',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            label: 'Profile',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.settings),
-            label: 'Settings',
-          ),
+          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
+          BottomNavigationBarItem(icon: Icon(Icons.lunch_dining), label: 'Add meal'),
+          BottomNavigationBarItem(icon: Icon(Icons.shopping_bag_outlined), label: 'Orders'),
+          BottomNavigationBarItem(icon: Icon(Icons.settings), label: 'Settings'),
         ],
       ),
     );

@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'start_screen.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -38,15 +39,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         leading: IconButton(
           icon: const Icon(Icons.arrow_back, color: Colors.white),
           onPressed: () {
-            Navigator.pop(context);
-            Navigator.pushAndRemoveUntil(
-              context,
-              MaterialPageRoute(builder: (context) => const FirstScreen()),
-              (route) => false,
-            );
-            // ScaffoldMessenger.of(context).showSnackBar(
-            //   const SnackBar(content: Text('Logged out successfully')),
-            // );
+            context.pop() ; 
           },
         ),
         title: const Text(

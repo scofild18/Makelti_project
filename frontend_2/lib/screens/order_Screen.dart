@@ -8,7 +8,6 @@ class OrdersScreen extends StatefulWidget {
 }
 
 class _OrdersScreenState extends State<OrdersScreen> {
-  // TODO: Replace this with real data from your backend/database
   // This list will be populated from your API when user places orders
   List<Order> orders = [
     Order(

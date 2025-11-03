@@ -1,5 +1,6 @@
 import 'package:Makelti/screens/start_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'register.dart';
 import 'home_screen.dart';
 
@@ -374,16 +375,9 @@ class _LoginScreenState extends State<LoginScreen> {
                       Expanded(
                         child: OutlinedButton(
                           onPressed: () {
-                            print('Demo ');
 
                             // Navigate to home screen
-                            Navigator.pushAndRemoveUntil(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => const FirstScreen(),
-                              ),
-                              (route) => false,
-                            );
+                                context.go('/home');
                           },
                           style: OutlinedButton.styleFrom(
                             padding: const EdgeInsets.symmetric(vertical: 16),
