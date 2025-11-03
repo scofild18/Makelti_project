@@ -63,7 +63,7 @@ class _SlidingButtonState extends State<SlidingButton>
       padding: const EdgeInsets.all(4),
       decoration: BoxDecoration(
         color: widget.backgroundColor,
-        borderRadius: BorderRadius.circular(30),
+        borderRadius: BorderRadius.circular(29),
       ),
       child: Stack(
         children: [
