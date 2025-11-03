@@ -1,7 +1,9 @@
+import 'package:Makelti/screens/start_screen.dart';
 import 'package:flutter/material.dart';
 import 'login_screen.dart';
 import 'profile_screen.dart';
 import 'faq_screen.dart';
+import 'home_screen.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});
@@ -22,7 +24,13 @@ class _SettingsScreenState extends State<SettingsScreen> {
         elevation: 0,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back, color: Colors.white),
-          onPressed: () => Navigator.pop(context),
+          onPressed: () {
+            Navigator.pushAndRemoveUntil(
+              context,
+              MaterialPageRoute(builder: (context) => const FirstScreen()),
+              (route) => false,
+            );
+          },
         ),
         title: const Text(
           'Settings',
@@ -297,4 +305,4 @@ class _SettingsScreenState extends State<SettingsScreen> {
 // )
 
 
-// this is the button to use it 
+// this is the button to use it

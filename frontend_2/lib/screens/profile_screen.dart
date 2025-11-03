@@ -1,5 +1,6 @@
+
 import 'package:flutter/material.dart';
-import 'package:Makelti/screens/start_screen.dart';
+import 'start_screen.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -43,6 +44,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
               MaterialPageRoute(builder: (context) => const FirstScreen()),
               (route) => false,
             );
+            // ScaffoldMessenger.of(context).showSnackBar(
+            //   const SnackBar(content: Text('Logged out successfully')),
+            // );
           },
         ),
         title: const Text(
@@ -121,7 +125,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
             const SizedBox(height: 40),
 
-            // Save Button
+
+// Save Button
             SizedBox(
               width: double.infinity,
               child: ElevatedButton(

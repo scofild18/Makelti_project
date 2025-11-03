@@ -1,10 +1,13 @@
+import 'package:Makelti/screens/start_screen.dart';
 import 'package:flutter/material.dart';
 import 'register.dart';
+import 'home_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
 
   @override
+  // ignore: library_private_types_in_public_api
   _LoginScreenState createState() => _LoginScreenState();
 }
 
@@ -53,8 +56,8 @@ class _LoginScreenState extends State<LoginScreen> {
       return 'Password is required';
     }
 
-    if (value.length < 6) {
-      return 'Password must be at least 6 characters';
+    if (value.length < 8) {
+      return 'Password must be at least 8 characters';
     }
 
     return null;
@@ -65,8 +68,6 @@ class _LoginScreenState extends State<LoginScreen> {
     if (_formKey.currentState!.validate()) {
       // String email = _emailController.text.trim();
       // String password = _passwordController.text;
-
-
 
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
@@ -260,11 +261,13 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                       errorBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(12),
-                        borderSide: const BorderSide(color: Colors.red, width: 1),
+                        borderSide:
+                            const BorderSide(color: Colors.red, width: 1),
                       ),
                       focusedErrorBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(12),
-                        borderSide: const BorderSide(color: Colors.red, width: 1),
+                        borderSide:
+                            const BorderSide(color: Colors.red, width: 1),
                       ),
                       contentPadding: const EdgeInsets.symmetric(
                         horizontal: 20,
@@ -301,11 +304,13 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                       errorBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(12),
-                        borderSide: const BorderSide(color: Colors.red, width: 1),
+                        borderSide:
+                            const BorderSide(color: Colors.red, width: 1),
                       ),
                       focusedErrorBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(12),
-                        borderSide: const BorderSide(color: Colors.red, width: 1),
+                        borderSide:
+                            const BorderSide(color: Colors.red, width: 1),
                       ),
                       contentPadding: const EdgeInsets.symmetric(
                         horizontal: 20,
@@ -370,9 +375,15 @@ class _LoginScreenState extends State<LoginScreen> {
                         child: OutlinedButton(
                           onPressed: () {
                             print('Demo ');
-                            ScaffoldMessenger.of(
+
+                            // Navigate to home screen
+                            Navigator.pushAndRemoveUntil(
                               context,
-                            ).showSnackBar(const SnackBar(content: Text('Demo ')));
+                              MaterialPageRoute(
+                                builder: (context) => const FirstScreen(),
+                              ),
+                              (route) => false,
+                            );
                           },
                           style: OutlinedButton.styleFrom(
                             padding: const EdgeInsets.symmetric(vertical: 16),

@@ -1,9 +1,7 @@
 import 'add_meal_screen.dart';
-import 'add_orders_screen.dart';
 import 'home_screen.dart';
 import 'package:flutter/material.dart';
 import 'profile_screen.dart';
-import 'faq_screen.dart';
 import 'settings_screen.dart';
 
 class FirstScreen extends StatefulWidget {
@@ -16,19 +14,18 @@ class FirstScreen extends StatefulWidget {
 class _FirstScreenState extends State<FirstScreen> {
   int _selectedIndex = 0;
 
-  final List<Widget> _screens =  const [
-    // i remouved const from here because i have a statfull widget
-    HomeScreen(),
-    AddMealScreen(),
-    ProfileScreen(),
-    SettingsScreen(),
-  ];
-
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
     });
   }
+
+  List<Widget> get _screens => [
+    const HomeScreen(),
+    AddMealScreen(onBackPressed: () => _onItemTapped(0)),
+    const ProfileScreen(),
+    const SettingsScreen(),
+  ];
 
   @override
   Widget build(BuildContext context) {
