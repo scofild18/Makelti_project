@@ -1,4 +1,6 @@
+
 import 'package:flutter/material.dart';
+import 'start_screen.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -36,16 +38,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
         leading: IconButton(
           icon: const Icon(Icons.arrow_back, color: Colors.white),
           onPressed: () {
-                Navigator.pop(context);
-                Navigator.pushAndRemoveUntil(
-                  context,
-                  MaterialPageRoute(builder: (context) => const FirstScreen()),
-                  (route) => false,
-                );
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text('Logged out successfully')),
-                );
-              },
+            Navigator.pop(context);
+            Navigator.pushAndRemoveUntil(
+              context,
+              MaterialPageRoute(builder: (context) => const FirstScreen()),
+              (route) => false,
+            );
+            // ScaffoldMessenger.of(context).showSnackBar(
+            //   const SnackBar(content: Text('Logged out successfully')),
+            // );
+          },
         ),
         title: const Text(
           'Informations personnelles',
@@ -68,7 +70,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     shape: BoxShape.circle,
                     color: Color(0xFFFFE8E0),
                   ),
-                  child: const Icon(Icons.person, size: 60, color: Color(0xFFFF6B35)),
+                  child: const Icon(Icons.person,
+                      size: 60, color: Color(0xFFFF6B35)),
                 ),
                 Positioned(
                   bottom: 0,
@@ -122,7 +125,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
             const SizedBox(height: 40),
 
-            // Save Button
+
+// Save Button
             SizedBox(
               width: double.infinity,
               child: ElevatedButton(
@@ -186,7 +190,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
               borderRadius: BorderRadius.circular(12),
               borderSide: BorderSide.none,
             ),
-            contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+            contentPadding:
+                const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
           ),
         ),
       ],
