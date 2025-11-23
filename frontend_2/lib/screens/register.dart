@@ -110,8 +110,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
       print('Register - Name: $name, Email: $email, Password: $password');
 
-      // TODO: Add your backend registration here
-
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text('Account created successfully!'),

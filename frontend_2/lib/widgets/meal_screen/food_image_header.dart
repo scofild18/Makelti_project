@@ -5,6 +5,7 @@ class FoodImageHeader extends StatelessWidget {
     super.key,
     required this.imageUrl,
     required this.price,
+    required this.herotag,
     required this.isFavorite,
     required this.onBackPressed,
     required this.onFavoritePressed,
@@ -13,6 +14,7 @@ class FoodImageHeader extends StatelessWidget {
   final String imageUrl;
   final String price;
   final bool isFavorite;
+  final String herotag;
   final VoidCallback onBackPressed;
   final VoidCallback onFavoritePressed;
 
@@ -30,12 +32,9 @@ class FoodImageHeader extends StatelessWidget {
               bottomRight: Radius.circular(30),
             ),
           ),
-          child: ClipRRect(
-            borderRadius: const BorderRadius.only(
-              bottomLeft: Radius.circular(30),
-              bottomRight: Radius.circular(30),
-            ),
-            child: Image.network(
+          child: Hero(
+            tag: herotag,
+            child: Image.asset(
               imageUrl,
               fit: BoxFit.cover,
               errorBuilder: (context, error, stackTrace) {

@@ -135,6 +135,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 itemBuilder: (context, index) {
                   final item = recentPosts[index];
+                  final heroTag = 'foodHero_$index'; // Unique hero tag
                   return FoodCard(
                     image: item['image'],
                     price: item['price'],
@@ -142,11 +143,12 @@ class _HomeScreenState extends State<HomeScreen> {
                     store: item['store'],
                     rating: item['rating'].toDouble(),
                     distance: item['distance'],
+                    herotag : heroTag , 
                     onTap: () {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (_) => const FoodDetailPage()),
+                            builder: (_) =>  FoodDetailPage( herotag: heroTag,)),
                       );
                     },
                   );

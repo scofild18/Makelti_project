@@ -8,7 +8,7 @@ class OrdersScreen extends StatefulWidget {
 }
 
 class _OrdersScreenState extends State<OrdersScreen> {
-  // This list will be populated from your API when user places orders
+
   List<Order> orders = [
     Order(
       id: '1',
@@ -19,7 +19,7 @@ class _OrdersScreenState extends State<OrdersScreen> {
       price: 8.5,
       quantity: 1,
       status: OrderStatus.accepted,
-      mealImage: '', // TODO: Add image URL from backend
+      mealImage: '',
     ),
     Order(
       id: '2',
@@ -332,7 +332,6 @@ class Order {
   });
 }
 
-// Order status enum
 enum OrderStatus {
   accepted, // Seller accepted the order
   pending, // Waiting for seller to accept/refuse

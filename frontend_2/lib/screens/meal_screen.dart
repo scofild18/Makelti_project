@@ -5,7 +5,9 @@ import '../widgets/meal_screen/quantity_selector.dart';
 import '../widgets/meal_screen/seller_info_card.dart';
 
 class FoodDetailPage extends StatefulWidget {
-  const FoodDetailPage({Key? key}) : super(key: key);
+ final String herotag ; 
+  
+  const FoodDetailPage({super.key , required this.herotag});
 
   @override
   State<FoodDetailPage> createState() => _FoodDetailPageState();
@@ -14,6 +16,7 @@ class FoodDetailPage extends StatefulWidget {
 class _FoodDetailPageState extends State<FoodDetailPage> {
   int quantity = 1;
   bool isFavorite = false;
+  
 
   // Dummy data for the food item
   final Map<String, dynamic> foodData = {
@@ -23,8 +26,8 @@ class _FoodDetailPageState extends State<FoodDetailPage> {
     'reviewCount': 124,
     'prepTime': '30-45 min',
     'description':
-        'A delicious homemade fresh garden salad bowl made with fresh, locally sourced ingredients. Prepared with love and care to bring you an authentic taste of home cooking.',
-    'imageUrl': 'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=800',
+     'A delicious homemade fresh garden salad bowl made with fresh, locally sourced ingredients. Prepared with love and care to bring you an authentic taste of home cooking.',
+    'imageUrl': 'assets/images/pasta.png',
     'ingredients': ['Fresh', 'Organic', 'Gluten-Free', 'Dairy'],
     'seller': {
       'name': 'Green Eats',
@@ -49,7 +52,6 @@ class _FoodDetailPageState extends State<FoodDetailPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
       body: Column(
         children: [
           Expanded(
@@ -57,12 +59,12 @@ class _FoodDetailPageState extends State<FoodDetailPage> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  // Image Header with Back and Favorite buttons
                   FoodImageHeader(
                     imageUrl: foodData['imageUrl'],
                     price: foodData['price'],
                     isFavorite: isFavorite,
                     onBackPressed: () => Navigator.pop(context),
+                    herotag : widget.herotag, 
                     onFavoritePressed: () {
                       setState(() {
                         isFavorite = !isFavorite;
