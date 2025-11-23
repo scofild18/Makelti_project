@@ -9,6 +9,7 @@ class FoodCard extends StatelessWidget {
     required this.store,
     required this.rating,
     required this.distance,
+    required this.herotag,
     this.onTap,
   });
 
@@ -18,6 +19,7 @@ class FoodCard extends StatelessWidget {
   final String store;
   final double rating;
   final String distance;
+  final String herotag;
   final VoidCallback? onTap;
 
   @override
@@ -44,11 +46,14 @@ class FoodCard extends StatelessWidget {
                 ClipRRect(
                   borderRadius:
                       const BorderRadius.vertical(top: Radius.circular(16)),
-                  child: Image.asset(
-                    image,
-                    height: 120,
-                    width: double.infinity,
-                    fit: BoxFit.cover,
+                  child: Hero(
+                    tag: herotag,
+                    child: Image.asset(
+                      image,
+                      height: 120,
+                      width: double.infinity,
+                      fit: BoxFit.cover,
+                    ),
                   ),
                 ),
                 Positioned(

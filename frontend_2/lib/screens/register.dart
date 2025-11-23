@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'start_screen.dart';
+
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
@@ -109,8 +109,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
       String password = _passwordController.text;
 
       print('Register - Name: $name, Email: $email, Password: $password');
-
-      // TODO: Add your backend registration here
 
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(

@@ -1,8 +1,6 @@
-import 'package:Makelti/screens/start_screen.dart';
+
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'login_screen.dart';
-import 'profile_screen.dart';
 import 'faq_screen.dart';
 
 class SettingsScreen extends StatefulWidget {

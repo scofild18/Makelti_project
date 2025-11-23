@@ -30,7 +30,7 @@ class NotFoundPage extends StatelessWidget {
 
 class AppRouterConfig {
   static final GoRouter appRouter = GoRouter(
-    initialLocation: '/home',
+    initialLocation: '/',
     routes: [
       /// --- Start / Auth Screens ---
       GoRoute(
