@@ -38,7 +38,7 @@ class AppTheme {
     ),
 
     appBarTheme: const AppBarTheme(
-      backgroundColor: Colors.deepOrange,
+      backgroundColor: Color(0xFFFEFBF6),
       foregroundColor: Colors.white,
       centerTitle: true,
       titleTextStyle: TextStyle(
@@ -47,10 +47,14 @@ class AppTheme {
         color: Colors.white,
       ),
     ),
-
+        textSelectionTheme: const TextSelectionThemeData(
+          cursorColor: Color(0xffe97844),
+          selectionColor: Color(0x33e97844),
+          selectionHandleColor: Color(0xffe97844),
+        ),
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
-        backgroundColor: Colors.deepOrange,
+        backgroundColor: const Color(0xffe97844),
         foregroundColor: Colors.white,
         textStyle: const TextStyle(fontWeight: FontWeight.bold),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
@@ -58,7 +62,7 @@ class AppTheme {
     ),
 
     floatingActionButtonTheme: const FloatingActionButtonThemeData(
-      backgroundColor: Colors.deepOrange,
+      backgroundColor: Color(0xffe97844),
       foregroundColor: Colors.white,
     ),
 
@@ -109,6 +113,11 @@ class AppTheme {
         color: Colors.white,
       ),
     ),
+    textSelectionTheme: const TextSelectionThemeData(
+  cursorColor: Color(0xffe97844),   
+  selectionColor: Color(0x33e97844),
+  selectionHandleColor: Color(0xffe97844),
+),
 
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(

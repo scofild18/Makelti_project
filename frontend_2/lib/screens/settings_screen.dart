@@ -16,17 +16,17 @@ class _SettingsScreenState extends State<SettingsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFF5F5F5),
       appBar: AppBar(
-        backgroundColor: const Color(0xFFFF6B35),
-        elevation: 0,
-      
-        title: const Text(
-          'Settings',
-          style: TextStyle(
-            color: Colors.white,
-            fontSize: 20,
-            fontWeight: FontWeight.w600,
+      centerTitle: false,
+        title: const Padding(
+          padding: EdgeInsets.only(left : 8.0),
+          child: Text(
+            'Settings',
+            style: TextStyle(
+              color: Colors.black,
+              fontSize: 20,
+              fontWeight: FontWeight.w600,
+            ),
           ),
         ),
       ),
@@ -34,9 +34,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
         child: Column(
           children: [
             Container(
-              height: 50,
+              height: 0,
               decoration: const BoxDecoration(
-                color: Color(0xFFFF6B35),
                 borderRadius: BorderRadius.only(
                   bottomLeft: Radius.circular(30),
                   bottomRight: Radius.circular(30),
@@ -61,7 +60,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 children: [
                   _buildSettingItem(
                     icon: Icons.person_outline,
-                    iconColor: const Color(0xFFFF6B35),
+                    iconColor: const Color(0xffe97844),
                     iconBgColor: const Color(0xFFFFE8E0),
                     title: 'Personal Information',
                     subtitle: 'Name, email, phone number',
@@ -72,7 +71,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   const Divider(height: 1, indent: 90),
                   _buildSettingItemWithSwitch(
                     icon: Icons.notifications_outlined,
-                    iconColor: const Color(0xFFFF6B35),
+                    iconColor: const Color(0xffe97844),
                     iconBgColor: const Color(0xFFFFE8E0),
                     title: 'Notifications',
                     subtitle: 'Receive notifications',
@@ -95,7 +94,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   const Divider(height: 1, indent: 90),
                   _buildSettingItem(
                     icon: Icons.help_outline,
-                    iconColor: const Color(0xFFFF6B35),
+                    iconColor: const Color(0xffe97844),
                     iconBgColor: const Color(0xFFFFE8E0),
                     title: 'FAQ',
                     subtitle: 'Frequently asked questions',
@@ -219,7 +218,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
           Switch(
             value: value,
             onChanged: onChanged,
-            activeThumbColor: const Color(0xFFFF6B35),
+            activeThumbColor: const Color(0xffe97844),
           ),
         ],
       ),
@@ -255,7 +254,6 @@ void _showLogoutDialog(BuildContext context) {
             onPressed: () {
               Navigator.pop(context); // close dialog
               
-              // ✅ Use GoRouter instead of Navigator
               context.goNamed('login'); 
 
               ScaffoldMessenger.of(context).showSnackBar(

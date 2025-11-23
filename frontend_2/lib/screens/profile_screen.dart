@@ -32,19 +32,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor: const Color(0xFFFF6B35),
         elevation: 0,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: Colors.white),
+          icon: const Icon(Icons.arrow_back, color: Colors.black),
           onPressed: () {
             context.pop() ; 
           },
         ),
-        title: const Text(
+        title:  const Text(
+          style: TextStyle(color: Colors.black ),
           'Informations personnelles',
-          style: TextStyle(color: Colors.white),
         ),
       ),
       body: SingleChildScrollView(
@@ -132,10 +130,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   );
                 },
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFFFF6B35),
-                  padding: const EdgeInsets.symmetric(vertical: 16),
+                  padding: const EdgeInsets.symmetric(vertical: 14),
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(30),
+                    borderRadius: BorderRadius.circular(38),
                   ),
                 ),
                 child: const Text(
@@ -176,9 +173,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
           controller: controller,
           keyboardType: keyboardType,
           decoration: InputDecoration(
-            prefixIcon: Icon(icon, color: const Color(0xFFFF6B35)),
+            prefixIcon: Icon(icon, color: const Color(0xffe97844)),
             filled: true,
-            fillColor: Colors.grey[100],
+            fillColor: Colors.white , 
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(12),
               borderSide: BorderSide.none,

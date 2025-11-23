@@ -89,117 +89,114 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        child: ListView(
-          physics: const BouncingScrollPhysics(),
-          children: [
-            const SearchBarWidget(),
-            const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 12, vertical: 4),
-              child: Divider(
-                color: Color.fromARGB(255, 66, 65, 65),
-                thickness: 0.2,
-              ),
+      body: ListView(
+        physics: const BouncingScrollPhysics(),
+        children: [
+          const SearchBarWidget(),
+          const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 12, vertical: 2),
+            child: Divider(
+              color: Color.fromARGB(255, 66, 65, 65),
+              thickness: 0.2,
             ),
-
-            const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 12),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    "Recent Posts",
-                    style:
-                        TextStyle(fontWeight: FontWeight.w600, fontSize: 16),
-                  ),
-                  Text(
-                    "See all",
-                    style: TextStyle(color: Colors.orange),
-                  ),
-                ],
-              ),
-            ),
-
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 12),
-              child: GridView.builder(
-                physics: const NeverScrollableScrollPhysics(),
-                shrinkWrap: true,
-                itemCount: recentPosts.length,
-                gridDelegate:
-                    const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  mainAxisSpacing: 12,
-                  crossAxisSpacing: 12,
-                  childAspectRatio: 0.72,
+          ),
+          const Padding(
+            padding: EdgeInsets.only(left: 16.0,right: 16.0, bottom : 12 , top : 12 ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  "Recent Posts",
+                  style:
+                      TextStyle(fontWeight: FontWeight.w600, fontSize: 16),
                 ),
+                Text(
+                  "See all",
+                  style: TextStyle(color: Colors.orange),
+                ),
+              ],
+            ),
+          ),
+      
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 12),
+            child: GridView.builder(
+              physics: const NeverScrollableScrollPhysics(),
+              shrinkWrap: true,
+              itemCount: recentPosts.length,
+              gridDelegate:
+                  const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                mainAxisSpacing: 12,
+                crossAxisSpacing: 12,
+                childAspectRatio: 0.78,
+              ),
+              itemBuilder: (context, index) {
+                final item = recentPosts[index];
+                return FoodCard(
+                  image: item['image'],
+                  price: item['price'],
+                  title: item['title'],
+                  store: item['store'],
+                  rating: item['rating'].toDouble(),
+                  distance: item['distance'],
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (_) => const FoodDetailPage()),
+                    );
+                  },
+                );
+              },
+            ),
+          ),
+      
+          /// Nearby Stores Header
+          const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 16),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  "Nearby Stores",
+                  style:
+                      TextStyle(fontWeight: FontWeight.w600, fontSize: 16),
+                ),
+                Text(
+                  "See all",
+                  style: TextStyle(color: Colors.orange),
+                ),
+              ],
+            ),
+          ),
+      
+          /// Horizontal List of stores
+          SizedBox(
+            height: 160,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 12),
+              child: ListView.separated(
+                scrollDirection: Axis.horizontal,
+                itemCount: nearbyStores.length,
+                separatorBuilder: (_, __) => const SizedBox(width: 10),
                 itemBuilder: (context, index) {
-                  final item = recentPosts[index];
-                  return FoodCard(
-                    image: item['image'],
-                    price: item['price'],
-                    title: item['title'],
-                    store: item['store'],
-                    rating: item['rating'].toDouble(),
-                    distance: item['distance'],
+                  final store = nearbyStores[index];
+                  return NearbyStoresCard(
+                    name: store['name'],
+                    distance: store['distance'],
+                    rating: store['rating'].toDouble(),
+                    image: store['image'],
                     onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (_) => const FoodDetailPage()),
-                      );
+                      context.goNamed('cook_profile');
                     },
                   );
                 },
               ),
             ),
-
-            /// Nearby Stores Header
-            const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 16),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    "Nearby Stores",
-                    style:
-                        TextStyle(fontWeight: FontWeight.w600, fontSize: 16),
-                  ),
-                  Text(
-                    "See all",
-                    style: TextStyle(color: Colors.orange),
-                  ),
-                ],
-              ),
-            ),
-
-            /// Horizontal List of stores
-            SizedBox(
-              height: 160,
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 12),
-                child: ListView.separated(
-                  scrollDirection: Axis.horizontal,
-                  itemCount: nearbyStores.length,
-                  separatorBuilder: (_, __) => const SizedBox(width: 10),
-                  itemBuilder: (context, index) {
-                    final store = nearbyStores[index];
-                    return NearbyStoresCard(
-                      name: store['name'],
-                      distance: store['distance'],
-                      rating: store['rating'].toDouble(),
-                      image: store['image'],
-                      onTap: () {
-                        context.goNamed('cook_profile');
-                      },
-                    );
-                  },
-                ),
-              ),
-            ),
-            const SizedBox(height: 24),
-          ],
-        ),
+          ),
+          const SizedBox(height: 24),
+        ],
       ),
     );
   }

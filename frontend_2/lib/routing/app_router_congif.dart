@@ -32,11 +32,10 @@ class AppRouterConfig {
   static final GoRouter appRouter = GoRouter(
     initialLocation: '/',
     routes: [
-      /// --- Start / Auth Screens ---
       GoRoute(
   path: '/',
   name: 'start',
-  builder: (context, state) => const SplashScreen(), // ✅ your splash page
+  builder: (context, state) => const SplashScreen(),
 ),
       GoRoute(
         path: '/login',
@@ -87,7 +86,6 @@ class AppRouterConfig {
   ],
 ),
 
-      /// --- Other standalone pages (no nav bar) ---
       GoRoute(
         path: '/order',
         name: 'order',

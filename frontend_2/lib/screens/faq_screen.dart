@@ -44,17 +44,16 @@ class FAQScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+
       appBar: AppBar(
-        backgroundColor: const Color(0xFFFF6B35),
         elevation: 0,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: Colors.white),
+          icon: const Icon(Icons.arrow_back, color: Colors.black),
           onPressed: () {
             Navigator.pop(context);
           },
         ),
-        title: const Text('FAQ', style: TextStyle(color: Colors.white)),
+        title: const Text('FAQ', style: TextStyle(color: Colors.black)),
       ),
       body: ListView.builder(
         padding: const EdgeInsets.all(20),

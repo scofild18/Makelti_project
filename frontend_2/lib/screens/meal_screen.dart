@@ -5,7 +5,7 @@ import '../widgets/meal_screen/quantity_selector.dart';
 import '../widgets/meal_screen/seller_info_card.dart';
 
 class FoodDetailPage extends StatefulWidget {
-  const FoodDetailPage({Key? key}) : super(key: key);
+  const FoodDetailPage({super.key});
 
   @override
   State<FoodDetailPage> createState() => _FoodDetailPageState();
@@ -49,7 +49,6 @@ class _FoodDetailPageState extends State<FoodDetailPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
       body: Column(
         children: [
           Expanded(
