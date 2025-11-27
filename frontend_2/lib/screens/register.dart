@@ -3,11 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:http/http.dart' as http;
 import 'package:supabase_flutter/supabase_flutter.dart';
-import 'login_screen.dart';
-import 'home_screen.dart';
+import 'package:Makelti/widgets/custom_snackbar.dart';
 
 class RegisterScreen extends StatefulWidget {
-  const RegisterScreen({super.key});
+  final Map<String, dynamic>? extra;
+  
+  const RegisterScreen({super.key, this.extra});
 
   @override
   _RegisterScreenState createState() => _RegisterScreenState();
@@ -21,6 +22,22 @@ class _RegisterScreenState extends State<RegisterScreen> {
   final _formKey = GlobalKey<FormState>();
   bool _obscurePassword = true;
   bool _isLoading = false;
+  String _userType = 'customer';
+
+  @override
+  void initState() {
+    super.initState();
+    
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (widget.extra != null && widget.extra!['showLogoutSuccess'] == true) {
+        CustomSnackBar.show(
+          context,
+          message: 'Logged out successfully',
+          type: SnackBarType.success,
+        );
+      }
+    });
+  }
 
   @override
   void dispose() {
@@ -30,14 +47,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
     super.dispose();
   }
 
-  // VALIDATION SIMPLE
   String? validateEmail(String? value) {
-    if (value == null || value.isEmpty) {
-      return 'Email is required';
-    }
-    if (!value.contains('@')) {
-      return 'Invalid email format';
-    }
+    if (value == null || value.isEmpty) return 'Email is required';
+    if (!value.contains('@')) return 'Invalid email format';
     return null;
   }
 
@@ -52,7 +64,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
     return null;
   }
 
-  // REGISTER + SYNC LOGIC
   Future<void> handleRegister() async {
     if (!_formKey.currentState!.validate()) return;
 
@@ -61,7 +72,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
     try {
       final supabase = Supabase.instance.client;
 
-      // STEP 1 — REGISTER WITH SUPABASE
       final AuthResponse res = await supabase.auth.signUp(
         email: _emailController.text.trim(),
         password: _passwordController.text.trim(),
@@ -72,18 +82,16 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
       if (user == null || session == null) {
         if (!mounted) return;
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text("Registration failed. Please verify your email."),
-            backgroundColor: Colors.red,
-          ),
+        CustomSnackBar.show(
+          context,
+          message: 'Registration failed. Please verify your email.',
+          type: SnackBarType.error,
         );
         return;
       }
 
       final token = session.accessToken;
 
-      // STEP 2 — SYNC WITH FASTAPI BACKEND
       final backendResponse = await http.post(
         Uri.parse("http://localhost:8000/api/auth/sync"),
         headers: {
@@ -94,53 +102,45 @@ class _RegisterScreenState extends State<RegisterScreen> {
           "id": user.id,
           "email": user.email,
           "full_name": _fullNameController.text.trim(),
-          "user_type": "customer",
+          "user_type": _userType,
         }),
       );
 
       if (backendResponse.statusCode != 200) {
         if (!mounted) return;
         final err = jsonDecode(backendResponse.body);
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text("Backend error: ${err['detail']}"),
-            backgroundColor: Colors.red,
-          ),
+        CustomSnackBar.show(
+          context,
+          message: "Backend error: ${err['detail']}",
+          type: SnackBarType.error,
         );
         return;
       }
 
-      // SUCCESS
       if (!mounted) return;
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text("Account created successfully!"),
-          backgroundColor: Colors.green,
-        ),
+      CustomSnackBar.show(
+        context,
+        message: 'Account created successfully!',
+        type: SnackBarType.success,
       );
 
-      // Utiliser go_router pour la navigation
       context.go('/home');
     } on AuthException catch (e) {
       if (!mounted) return;
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text("Registration failed: ${e.message}"),
-          backgroundColor: Colors.red,
-        ),
+      CustomSnackBar.show(
+        context,
+        message: "Registration failed: ${e.message}",
+        type: SnackBarType.error,
       );
     } catch (e) {
       if (!mounted) return;
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text("Unexpected error: $e"),
-          backgroundColor: Colors.red,
-        ),
+      CustomSnackBar.show(
+        context,
+        message: "Unexpected error: $e",
+        type: SnackBarType.error,
       );
     } finally {
-      if (mounted) {
-        setState(() => _isLoading = false);
-      }
+      if (mounted) setState(() => _isLoading = false);
     }
   }
 
@@ -155,10 +155,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
             child: Form(
               key: _formKey,
               child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
+                  // Logo
                   Container(
-                    width: 100,
-                    height: 100,
+                    width: 80,
+                    height: 80,
                     decoration: BoxDecoration(
                       color: const Color(0xFFFF6B35),
                       shape: BoxShape.circle,
@@ -170,31 +172,21 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         ),
                       ],
                     ),
-                    child: const Icon(
-                      Icons.restaurant_menu,
-                      size: 50,
-                      color: Colors.white,
-                    ),
+                    child: const Icon(Icons.restaurant_menu, size: 40, color: Colors.white),
                   ),
-                  const SizedBox(height: 24),
+                  const SizedBox(height: 16),
                   const Text(
                     'Create Account',
-                    style: TextStyle(
-                      fontSize: 32,
-                      fontWeight: FontWeight.bold,
-                      color: Color(0xFFFF6B35),
-                    ),
+                    style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold, color: Color(0xFFFF6B35)),
                   ),
                   const SizedBox(height: 24),
-                  const Align(
-                    alignment: Alignment.centerLeft,
-                    child: Text('Full Name', style: TextStyle(fontSize: 16)),
-                  ),
-                  const SizedBox(height: 8),
+
+                  // Full Name
                   TextFormField(
                     controller: _fullNameController,
                     validator: validateFullName,
                     decoration: InputDecoration(
+                      labelText: 'Full Name',
                       hintText: 'John Doe',
                       filled: true,
                       fillColor: Colors.grey[100],
@@ -204,17 +196,15 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       ),
                     ),
                   ),
-                  const SizedBox(height: 20),
-                  const Align(
-                    alignment: Alignment.centerLeft,
-                    child: Text('Email', style: TextStyle(fontSize: 16)),
-                  ),
-                  const SizedBox(height: 8),
+                  const SizedBox(height: 16),
+
+                  // Email
                   TextFormField(
                     controller: _emailController,
                     validator: validateEmail,
                     keyboardType: TextInputType.emailAddress,
                     decoration: InputDecoration(
+                      labelText: 'Email',
                       hintText: 'you@example.com',
                       filled: true,
                       fillColor: Colors.grey[100],
@@ -224,24 +214,20 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       ),
                     ),
                   ),
-                  const SizedBox(height: 20),
-                  const Align(
-                    alignment: Alignment.centerLeft,
-                    child: Text('Password', style: TextStyle(fontSize: 16)),
-                  ),
-                  const SizedBox(height: 8),
+                  const SizedBox(height: 16),
+
+                  // Password
                   TextFormField(
                     controller: _passwordController,
                     validator: validatePassword,
                     obscureText: _obscurePassword,
                     decoration: InputDecoration(
+                      labelText: 'Password',
                       hintText: '••••••••',
                       filled: true,
                       fillColor: Colors.grey[100],
                       suffixIcon: IconButton(
-                        icon: Icon(
-                          _obscurePassword ? Icons.visibility_off : Icons.visibility,
-                        ),
+                        icon: Icon(_obscurePassword ? Icons.visibility_off : Icons.visibility),
                         onPressed: () => setState(() => _obscurePassword = !_obscurePassword),
                       ),
                       border: OutlineInputBorder(
@@ -250,7 +236,84 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       ),
                     ),
                   ),
-                  const SizedBox(height: 32),
+                  const SizedBox(height: 16),
+
+                  // User Type Toggle
+                  Container(
+                    decoration: BoxDecoration(
+                      color: Colors.grey[100],
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: GestureDetector(
+                            onTap: () => setState(() => _userType = 'customer'),
+                            child: Container(
+                              padding: const EdgeInsets.symmetric(vertical: 14),
+                              decoration: BoxDecoration(
+                                color: _userType == 'customer' ? const Color(0xFFFF6B35) : Colors.transparent,
+                                borderRadius: BorderRadius.circular(12),
+                              ),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Icon(
+                                    Icons.person,
+                                    size: 20,
+                                    color: _userType == 'customer' ? Colors.white : Colors.grey[600],
+                                  ),
+                                  const SizedBox(width: 8),
+                                  Text(
+                                    'Customer',
+                                    style: TextStyle(
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.w600,
+                                      color: _userType == 'customer' ? Colors.white : Colors.grey[600],
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+                        Expanded(
+                          child: GestureDetector(
+                            onTap: () => setState(() => _userType = 'cook'),
+                            child: Container(
+                              padding: const EdgeInsets.symmetric(vertical: 14),
+                              decoration: BoxDecoration(
+                                color: _userType == 'cook' ? const Color(0xFFFF6B35) : Colors.transparent,
+                                borderRadius: BorderRadius.circular(12),
+                              ),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Icon(
+                                    Icons.restaurant,
+                                    size: 20,
+                                    color: _userType == 'cook' ? Colors.white : Colors.grey[600],
+                                  ),
+                                  const SizedBox(width: 8),
+                                  Text(
+                                    'Cook',
+                                    style: TextStyle(
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.w600,
+                                      color: _userType == 'cook' ? Colors.white : Colors.grey[600],
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(height: 24),
+
+                  // Register Button
                   SizedBox(
                     width: double.infinity,
                     child: ElevatedButton(
@@ -258,29 +321,22 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       style: ElevatedButton.styleFrom(
                         backgroundColor: const Color(0xFFFF6B35),
                         padding: const EdgeInsets.symmetric(vertical: 16),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(30),
-                        ),
+                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
                       ),
                       child: _isLoading
                           ? const CircularProgressIndicator(strokeWidth: 2, color: Colors.white)
                           : const Text('Create Account', style: TextStyle(fontSize: 18, color: Colors.white)),
                     ),
                   ),
-                  const SizedBox(height: 24),
+
+                  const SizedBox(height: 20),
                   GestureDetector(
-                    onTap: () {
-                      context.go('/login');
-                    },
+                    onTap: () => context.go('/login'),
                     child: Text(
                       "Already have an account? Login",
-                      style: TextStyle(
-                        color: Colors.grey[700],
-                        decoration: TextDecoration.underline,
-                      ),
+                      style: TextStyle(color: Colors.grey[700], decoration: TextDecoration.underline),
                     ),
                   ),
-                  const SizedBox(height: 40),
                 ],
               ),
             ),

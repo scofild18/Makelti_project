@@ -65,7 +65,7 @@ class _SplashScreenState extends State<SplashScreen>
     // Navigate to FirstScreen after delay
    Timer(const Duration(seconds: 3), () {
   if (mounted) {
-    context.go('/home'); // or whichever route you want
+    context.go('/register'); // or whichever route you want
   }
 });
   }

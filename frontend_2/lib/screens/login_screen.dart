@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:Makelti/widgets/custom_snackbar.dart';
 import 'register.dart';
 import 'home_screen.dart';
 
@@ -59,40 +60,36 @@ class _LoginScreenState extends State<LoginScreen> {
 
       if (session == null || user == null) {
         if (!mounted) return;
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text("Invalid email or password"),
-            backgroundColor: Colors.red,
-          ),
+        CustomSnackBar.show(
+          context,
+          message: 'Invalid email or password',
+          type: SnackBarType.error,
         );
         return;
       }
 
       if (!mounted) return;
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text("Login successful!"),
-          backgroundColor: Colors.green,
-        ),
+      CustomSnackBar.show(
+        context,
+        message: 'Login successful!',
+        type: SnackBarType.success,
       );
 
       // Utiliser go_router pour la navigation
       context.go('/home');
     } on AuthException catch (e) {
       if (!mounted) return;
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text("Login failed: ${e.message}"),
-          backgroundColor: Colors.red,
-        ),
+      CustomSnackBar.show(
+        context,
+        message: "Login failed: ${e.message}",
+        type: SnackBarType.error,
       );
     } catch (e) {
       if (!mounted) return;
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text("Unexpected error: $e"),
-          backgroundColor: Colors.red,
-        ),
+      CustomSnackBar.show(
+        context,
+        message: "Unexpected error: $e",
+        type: SnackBarType.error,
       );
     } finally {
       if (mounted) setState(() => _isLoading = false);
@@ -279,12 +276,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                       GestureDetector(
                         onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (_) => const RegisterScreen(),
-                            ),
-                          );
+                          context.go('/register');
                         },
                         child: const Text(
                           "Sign up",

@@ -1,6 +1,7 @@
-
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:Makelti/widgets/custom_snackbar.dart';
 import 'faq_screen.dart';
 
 class SettingsScreen extends StatefulWidget {
@@ -17,9 +18,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-      centerTitle: false,
+        centerTitle: false,
         title: const Padding(
-          padding: EdgeInsets.only(left : 8.0),
+          padding: EdgeInsets.only(left: 8.0),
           child: Text(
             'Settings',
             style: TextStyle(
@@ -43,6 +44,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
               ),
             ),
             const SizedBox(height: 20),
+
+            // MAIN SETTINGS CONTAINER
             Container(
               margin: const EdgeInsets.symmetric(horizontal: 20),
               decoration: BoxDecoration(
@@ -64,11 +67,11 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     iconBgColor: const Color(0xFFFFE8E0),
                     title: 'Personal Information',
                     subtitle: 'Name, email, phone number',
-                    onTap: () {
-                      context.push("/profile") ; 
-                    },
+                    onTap: () => context.push("/profile"),
                   ),
+
                   const Divider(height: 1, indent: 90),
+
                   _buildSettingItemWithSwitch(
                     icon: Icons.notifications_outlined,
                     iconColor: const Color(0xffe97844),
@@ -79,19 +82,18 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     onChanged: (value) {
                       setState(() => notificationsEnabled = value);
 
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                          content: Text(
-                            value
-                                ? 'Notifications enabled'
-                                : 'Notifications disabled',
-                          ),
-                          duration: const Duration(seconds: 1),
-                        ),
+                      CustomSnackBar.show(
+                        context,
+                        message: value
+                            ? 'Notifications enabled'
+                            : 'Notifications disabled',
+                        type: SnackBarType.info,
                       );
                     },
                   ),
+
                   const Divider(height: 1, indent: 90),
+
                   _buildSettingItem(
                     icon: Icons.help_outline,
                     iconColor: const Color(0xffe97844),
@@ -101,11 +103,15 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     onTap: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => FAQScreen()),
+                        MaterialPageRoute(
+                          builder: (context) => FAQScreen(),
+                        ),
                       );
                     },
                   ),
+
                   const Divider(height: 1, indent: 90),
+
                   _buildSettingItem(
                     icon: Icons.logout,
                     iconColor: Colors.red,
@@ -118,12 +124,17 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 ],
               ),
             ),
+
             const SizedBox(height: 40),
           ],
         ),
       ),
     );
   }
+
+  // --------------------------------------------------------
+  // NORMAL SETTING ITEM
+  // --------------------------------------------------------
 
   Widget _buildSettingItem({
     required IconData icon,
@@ -150,6 +161,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
               child: Icon(icon, color: iconColor, size: 24),
             ),
             const SizedBox(width: 16),
+
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -165,17 +177,25 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   const SizedBox(height: 4),
                   Text(
                     subtitle,
-                    style: TextStyle(fontSize: 14, color: Colors.grey[600]),
+                    style: TextStyle(
+                      fontSize: 14,
+                      color: Colors.grey[600],
+                    ),
                   ),
                 ],
               ),
             ),
+
             Icon(Icons.chevron_right, color: Colors.grey[400]),
           ],
         ),
       ),
     );
   }
+
+  // --------------------------------------------------------
+  // SETTING ITEM WITH SWITCH
+  // --------------------------------------------------------
 
   Widget _buildSettingItemWithSwitch({
     required IconData icon,
@@ -200,21 +220,31 @@ class _SettingsScreenState extends State<SettingsScreen> {
             child: Icon(icon, color: iconColor, size: 24),
           ),
           const SizedBox(width: 16),
+
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(title,
-                    style: const TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w600,
-                        color: Colors.black87)),
+                Text(
+                  title,
+                  style: const TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w600,
+                    color: Colors.black87,
+                  ),
+                ),
                 const SizedBox(height: 4),
-                Text(subtitle,
-                    style: TextStyle(fontSize: 14, color: Colors.grey[600])),
+                Text(
+                  subtitle,
+                  style: TextStyle(
+                    fontSize: 14,
+                    color: Colors.grey[600],
+                  ),
+                ),
               ],
             ),
           ),
+
           Switch(
             value: value,
             onChanged: onChanged,
@@ -225,72 +255,103 @@ class _SettingsScreenState extends State<SettingsScreen> {
     );
   }
 
+  // --------------------------------------------------------
+  // LOGOUT DIALOG
+  // --------------------------------------------------------
 
-void _showLogoutDialog(BuildContext context) {
-  showDialog(
-    context: context,
-    builder: (BuildContext context) {
-      return AlertDialog(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(20),
-        ),
-        title: const Text(
-          'Log Out',
-          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
-        ),
-        content: const Text(
-          'Are you sure you want to log out?',
-          style: TextStyle(fontSize: 16),
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: Text(
-              'Cancel',
-              style: TextStyle(color: Colors.grey[600], fontSize: 16),
+  void _showLogoutDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext dialogContext) {
+        return AlertDialog(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20),
+          ),
+          title: const Text(
+            'Log Out',
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 20,
             ),
           ),
-          ElevatedButton(
-            onPressed: () {
-              Navigator.pop(context); // close dialog
-              
-              context.goNamed('login'); 
-
-              ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(
-                  content: Text('Logged out successfully'),
+          content: const Text(
+            'Are you sure you want to log out?',
+            style: TextStyle(fontSize: 16),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(dialogContext),
+              child: Text(
+                'Cancel',
+                style: TextStyle(
+                  color: Colors.grey[600],
+                  fontSize: 16,
                 ),
-              );
-            },
-            style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.red,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10),
               ),
             ),
-            child: const Text(
-              'Log Out',
-              style: TextStyle(fontSize: 16, color: Colors.white),
+
+            ElevatedButton(
+              onPressed: () async {
+                Navigator.pop(dialogContext);
+
+                // LOADING POPUP
+                showDialog(
+                  context: context,
+                  barrierDismissible: false,
+                  builder: (_) => const Center(
+                    child: CircularProgressIndicator(
+                      color: Color(0xffe97844),
+                    ),
+                  ),
+                );
+
+                try {
+                  await Supabase.instance.client.auth.signOut();
+
+                  if (!context.mounted) return;
+
+                  Navigator.of(context, rootNavigator: true).pop();
+
+                  CustomSnackBar.show(
+                    context,
+                    message: 'Logged out successfully',
+                    type: SnackBarType.success,
+                  );
+
+                  await Future.delayed(const Duration(milliseconds: 800));
+
+                  if (!context.mounted) return;
+
+                  context.go('/register');
+                } catch (e) {
+                  if (!context.mounted) return;
+
+                  Navigator.of(context, rootNavigator: true).pop();
+
+                  CustomSnackBar.show(
+                    context,
+                    message: 'Error logging out: $e',
+                    type: SnackBarType.error,
+                  );
+                }
+              },
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.red,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+              ),
+              child: const Text(
+                'Log Out',
+                style: TextStyle(
+                  fontSize: 16,
+                  color: Colors.white,
+                ),
+              ),
             ),
-          ),
-        ],
-      );
-    },
-  );
+          ],
+        );
+      },
+    );
+  }
 }
-}
-
-
-
-// IconButton(
-//   icon: Icon(Icons.settings),
-//   onPressed: () {
-//     Navigator.push(
-//       context,
-//       MaterialPageRoute(builder: (context) => SettingsScreen()),
-//     );
-//   },
-// )
-
-
-// this is the button to use it
