@@ -1,1 +1,4 @@
 .idea/
+backend/.env
+backend/.venv
+frontend_2/.env
