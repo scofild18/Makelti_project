@@ -1,14 +1,14 @@
+import 'package:Makelti/logic/cubit/orders/orders_cubit.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:Makelti/routing/app_router_congif.dart';
-import 'package:Makelti/providers/orders_provider.dart'; 
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:Makelti/routing/app_router_congif.dart'; 
 import 'utils/application_theme.dart';
 
 void main() {
   runApp(
-    MultiProvider(
+    MultiBlocProvider(
       providers: [
-        ChangeNotifierProvider(create: (_) => OrdersProvider()), 
+        BlocProvider(create: (_) => OrdersCubit()),
       ],
       child: const MyApp(),
     ),

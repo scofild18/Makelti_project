@@ -6,6 +6,7 @@
   final String title;
   final int qty;
   final double price;
+    double? rating ; 
 
   Order({
     required this.name,
@@ -15,5 +16,6 @@
     required this.title,
     required this.qty,
     required this.price,
+    this.rating , 
   });
 }

@@ -1,9 +1,8 @@
-import 'package:Makelti/screens/orders_management.dart';
+import 'package:Makelti/screens/client_orders_management.dart';
 import 'package:Makelti/screens/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-// Import your screens
 import 'package:Makelti/screens/start_screen.dart';
 import 'package:Makelti/screens/login_screen.dart';
 import 'package:Makelti/screens/register.dart';
@@ -16,7 +15,9 @@ import 'package:Makelti/screens/add_orders_screen.dart';
 import 'package:Makelti/screens/add_meal_screen.dart';
 import 'package:Makelti/screens/faq_screen.dart';
 
-// Optional: simple 404 page
+
+
+
 class NotFoundPage extends StatelessWidget {
   const NotFoundPage({super.key});
 
@@ -66,7 +67,7 @@ class AppRouterConfig {
     GoRoute(
       path: '/orders',
       name: 'orders',
-      builder: (context, state) => const OrdersManagement(),
+      builder: (context, state) => const ClientOrdersManagement(),
     ),
     GoRoute(
       path: '/profile',
