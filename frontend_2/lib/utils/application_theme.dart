@@ -7,35 +7,8 @@ class AppTheme {
     primarySwatch: Colors.orange,
     scaffoldBackgroundColor: const Color(0xFFFEFBF6),
 
-    textTheme: GoogleFonts.poppinsTextTheme().copyWith(
-      displayLarge: const TextStyle(
-        fontSize: 32,
-        fontWeight: FontWeight.bold,
-        color: Colors.black87,
-      ),
-      titleLarge: const TextStyle(
-        fontSize: 20,
-        fontWeight: FontWeight.w600,
-        color: Colors.black87,
-      ),
-      bodyLarge: const TextStyle(
-        fontSize: 16,
-        color: Colors.black87,
-      ),
-      bodyMedium: const TextStyle(
-        fontSize: 14,
-        color: Colors.black87,
-      ),
-      bodySmall: const TextStyle(
-        fontSize: 12,
-        color: Colors.grey,
-      ),
-      labelLarge: const TextStyle(
-        fontSize: 12,
-        fontWeight: FontWeight.w600,
-        color: Colors.deepOrange,
-      ),
-    ),
+    textTheme: GoogleFonts.poppinsTextTheme(),
+fontFamily: GoogleFonts.poppins().fontFamily,
 
     appBarTheme: const AppBarTheme(
       backgroundColor: Color(0xFFFEFBF6),

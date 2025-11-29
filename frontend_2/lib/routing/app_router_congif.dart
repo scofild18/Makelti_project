@@ -1,4 +1,6 @@
 import 'package:Makelti/screens/client_orders_management.dart';
+import 'package:Makelti/screens/see_all_posts.dart';
+import 'package:Makelti/screens/see_all_stores.dart';
 import 'package:Makelti/screens/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -17,7 +19,7 @@ import 'package:Makelti/screens/faq_screen.dart';
 
 
 
-
+ 
 class NotFoundPage extends StatelessWidget {
   const NotFoundPage({super.key});
 
@@ -86,6 +88,19 @@ class AppRouterConfig {
     ),
   ],
 ),
+
+GoRoute(
+        path: '/see_all_posts',
+        name: 'see_all_posts',
+        builder: (context, state) =>  SeeAllPostsScreen(),
+      ),
+
+
+      GoRoute(
+        path: '/see_all_stores',
+        name: 'see_all_stores',
+        builder: (context, state) =>  SeeAllStores(),
+      ),
 
       GoRoute(
         path: '/order',
