@@ -1,3 +1,4 @@
+import 'package:Makelti/logic/cubit/addMeal/add_meal_cubit.dart';
 import 'package:Makelti/logic/cubit/meals/meal_cubit.dart';
 import 'package:Makelti/logic/cubit/orders/orders_cubit.dart';
 import 'package:flutter/material.dart';
@@ -22,6 +23,7 @@ void main() async {
       providers: [
         BlocProvider(create: (_) => OrdersCubit()),
         BlocProvider(create: (_) =>MealCubit()),
+        BlocProvider(create: (_) =>AddMealCubit()),
       ],
       child: const MyApp(),
     ),

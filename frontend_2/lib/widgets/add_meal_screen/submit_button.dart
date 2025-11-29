@@ -9,7 +9,7 @@ class SubmitButton extends StatelessWidget {
   });
 
   final String text;
-  final VoidCallback onPressed;
+  final Future<void> Function()? onPressed;
   final bool isLoading;
 
   @override
