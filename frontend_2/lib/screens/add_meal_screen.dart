@@ -8,7 +8,7 @@ class AddMealScreen extends StatefulWidget {
   const AddMealScreen({super.key, this.onBackPressed});
 
   final VoidCallback? onBackPressed;
-
+ 
   @override
   State<AddMealScreen> createState() => _AddMealScreenState();
 }

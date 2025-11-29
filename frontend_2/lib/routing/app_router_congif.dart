@@ -1,9 +1,12 @@
-import 'package:Makelti/screens/orders_management.dart';
+import 'package:Makelti/screens/client_meal_screen.dart';
+import 'package:Makelti/screens/client_orders_management.dart';
+import 'package:Makelti/screens/cook_orders_management.dart';
+import 'package:Makelti/screens/see_all_posts.dart';
+import 'package:Makelti/screens/see_all_stores.dart';
 import 'package:Makelti/screens/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-// Import your screens
 import 'package:Makelti/screens/start_screen.dart';
 import 'package:Makelti/screens/login_screen.dart';
 import 'package:Makelti/screens/register.dart';
@@ -16,7 +19,9 @@ import 'package:Makelti/screens/add_orders_screen.dart';
 import 'package:Makelti/screens/add_meal_screen.dart';
 import 'package:Makelti/screens/faq_screen.dart';
 
-// Optional: simple 404 page
+
+
+ 
 class NotFoundPage extends StatelessWidget {
   const NotFoundPage({super.key});
 
@@ -66,7 +71,7 @@ class AppRouterConfig {
     GoRoute(
       path: '/orders',
       name: 'orders',
-      builder: (context, state) => const OrdersManagement(),
+      builder: (context, state) => const CookOrdersManagement(),
     ),
     GoRoute(
       path: '/profile',
@@ -85,6 +90,26 @@ class AppRouterConfig {
     ),
   ],
 ),
+
+
+GoRoute(
+        path: '/client_meal_screen',
+        name: 'client_meal_screen',
+        builder: (context, state) =>  const ClientMealScreen(),
+      ),
+
+GoRoute(
+        path: '/see_all_posts',
+        name: 'see_all_posts',
+        builder: (context, state) =>  SeeAllPostsScreen(),
+      ),
+
+
+      GoRoute(
+        path: '/see_all_stores',
+        name: 'see_all_stores',
+        builder: (context, state) =>  SeeAllStores(),
+      ),
 
       GoRoute(
         path: '/order',
