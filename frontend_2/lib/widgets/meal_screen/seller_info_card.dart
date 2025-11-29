@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
-class SellerInfoCard extends StatelessWidget {
+class SellerInfoCard extends StatefulWidget {
   const SellerInfoCard({
     super.key,
     required this.name,
@@ -12,6 +13,11 @@ class SellerInfoCard extends StatelessWidget {
   final String distance;
   final VoidCallback? onViewTap;
 
+  @override
+  State<SellerInfoCard> createState() => _SellerInfoCardState();
+}
+
+class _SellerInfoCardState extends State<SellerInfoCard> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -28,7 +34,7 @@ class SellerInfoCard extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                name,
+                widget.name,
                 style: const TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
@@ -44,7 +50,7 @@ class SellerInfoCard extends StatelessWidget {
                   ),
                   const SizedBox(width: 4),
                   Text(
-                    '$distance away',
+                    '${widget.distance} away',
                     style: TextStyle(
                       color: Colors.grey[600],
                       fontSize: 14,
@@ -55,8 +61,12 @@ class SellerInfoCard extends StatelessWidget {
             ],
           ),
           TextButton(
-            onPressed: onViewTap ?? () {},
-            child: const Text('View'),
+            onPressed: widget.onViewTap ?? () {
+              context.pushNamed("cook_profile");
+            },
+            child: const Text('View' , style: TextStyle(
+              color: Colors.orange
+            ),),
           ),
         ],
       ),

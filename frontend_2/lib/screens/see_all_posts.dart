@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import '../widgets/home_screen/food_card.dart';
 import '../widgets/home_screen/search_bar.dart';
-import 'meal_screen.dart';
+import 'client_meal_screen.dart';
 
 class SeeAllPostsScreen extends StatelessWidget {
 
@@ -135,7 +135,7 @@ final List<Map<String, dynamic>> allPosts = [
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (_) => const FoodDetailPage(),
+                            builder: (_) => const ClientMealScreen(),
                           ),
                         );
                       },

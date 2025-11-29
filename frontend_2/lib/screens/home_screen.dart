@@ -4,7 +4,6 @@ import 'package:go_router/go_router.dart';
 import '../widgets/home_screen/food_card.dart';
 import '../widgets/home_screen/nearby_stores_card.dart';
 import '../widgets/home_screen/search_bar.dart';
-import 'meal_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -236,11 +235,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     rating: item['rating'].toDouble(),
                     distance: item['distance'],
                     onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (_) => const FoodDetailPage()),
-                      );
+                      context.pushNamed("client_meal_screen");
                     },
                   ),
                 );

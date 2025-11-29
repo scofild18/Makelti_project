@@ -1,4 +1,6 @@
+import 'package:Makelti/screens/client_meal_screen.dart';
 import 'package:Makelti/screens/client_orders_management.dart';
+import 'package:Makelti/screens/cook_orders_management.dart';
 import 'package:Makelti/screens/see_all_posts.dart';
 import 'package:Makelti/screens/see_all_stores.dart';
 import 'package:Makelti/screens/splash_screen.dart';
@@ -69,7 +71,7 @@ class AppRouterConfig {
     GoRoute(
       path: '/orders',
       name: 'orders',
-      builder: (context, state) => const ClientOrdersManagement(),
+      builder: (context, state) => const CookOrdersManagement(),
     ),
     GoRoute(
       path: '/profile',
@@ -88,6 +90,13 @@ class AppRouterConfig {
     ),
   ],
 ),
+
+
+GoRoute(
+        path: '/client_meal_screen',
+        name: 'client_meal_screen',
+        builder: (context, state) =>  const ClientMealScreen(),
+      ),
 
 GoRoute(
         path: '/see_all_posts',
