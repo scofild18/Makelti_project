@@ -1,134 +1,157 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:Makelti/widgets/custom_snackbar.dart';
+import 'package:Makelti/logic/cubit/settings/settings_cubit.dart';
+import 'package:Makelti/logic/cubit/settings/settings_state.dart';
 import 'faq_screen.dart';
 
-class SettingsScreen extends StatefulWidget {
+class SettingsScreen extends StatelessWidget {
   const SettingsScreen({super.key});
 
   @override
-  _SettingsScreenState createState() => _SettingsScreenState();
-}
-
-class _SettingsScreenState extends State<SettingsScreen> {
-  bool notificationsEnabled = true;
-
-  @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        centerTitle: false,
-        title: const Padding(
-          padding: EdgeInsets.only(left: 8.0),
-          child: Text(
-            'Settings',
-            style: TextStyle(
-              color: Colors.black,
-              fontSize: 20,
-              fontWeight: FontWeight.w600,
-            ),
-          ),
-        ),
-      ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            Container(
-              height: 0,
-              decoration: const BoxDecoration(
-                borderRadius: BorderRadius.only(
-                  bottomLeft: Radius.circular(30),
-                  bottomRight: Radius.circular(30),
+    return BlocConsumer<SettingsCubit, SettingsState>(
+      listener: (context, state) {
+        if (state.successMessage != null) {
+          CustomSnackBar.show(
+            context,
+            message: state.successMessage!,
+            type: SnackBarType.success,
+          );
+          context.read<SettingsCubit>().clearMessages();
+          
+          // Navigate to register after successful logout
+          Future.delayed(const Duration(milliseconds: 800), () {
+            if (context.mounted) {
+              context.go('/register');
+            }
+          });
+        }
+        if (state.errorMessage != null) {
+          CustomSnackBar.show(
+            context,
+            message: state.errorMessage!,
+            type: SnackBarType.error,
+          );
+          context.read<SettingsCubit>().clearMessages();
+        }
+      },
+      builder: (context, state) {
+        return Scaffold(
+          appBar: AppBar(
+            centerTitle: false,
+            title: const Padding(
+              padding: EdgeInsets.only(left: 8.0),
+              child: Text(
+                'Settings',
+                style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 20,
+                  fontWeight: FontWeight.w600,
                 ),
               ),
             ),
-            const SizedBox(height: 20),
-
-            // MAIN SETTINGS CONTAINER
-            Container(
-              margin: const EdgeInsets.symmetric(horizontal: 20),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(20),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.grey.withOpacity(0.1),
-                    spreadRadius: 1,
-                    blurRadius: 10,
+          ),
+          body: SingleChildScrollView(
+            child: Column(
+              children: [
+                Container(
+                  height: 0,
+                  decoration: const BoxDecoration(
+                    borderRadius: BorderRadius.only(
+                      bottomLeft: Radius.circular(30),
+                      bottomRight: Radius.circular(30),
+                    ),
                   ),
-                ],
-              ),
-              child: Column(
-                children: [
-                  _buildSettingItem(
-                    icon: Icons.person_outline,
-                    iconColor: const Color(0xffe97844),
-                    iconBgColor: const Color(0xFFFFE8E0),
-                    title: 'Personal Information',
-                    subtitle: 'Name, email, phone number',
-                    onTap: () => context.push("/profile"),
+                ),
+                const SizedBox(height: 20),
+
+                // MAIN SETTINGS CONTAINER
+                Container(
+                  margin: const EdgeInsets.symmetric(horizontal: 20),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(20),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey.withOpacity(0.1),
+                        spreadRadius: 1,
+                        blurRadius: 10,
+                      ),
+                    ],
                   ),
+                  child: Column(
+                    children: [
+                      _buildSettingItem(
+                        icon: Icons.person_outline,
+                        iconColor: const Color(0xffe97844),
+                        iconBgColor: const Color(0xFFFFE8E0),
+                        title: 'Personal Information',
+                        subtitle: 'Name, email, phone number',
+                        onTap: () => context.push("/profile"),
+                      ),
 
-                  const Divider(height: 1, indent: 90),
+                      const Divider(height: 1, indent: 90),
 
-                  _buildSettingItemWithSwitch(
-                    icon: Icons.notifications_outlined,
-                    iconColor: const Color(0xffe97844),
-                    iconBgColor: const Color(0xFFFFE8E0),
-                    title: 'Notifications',
-                    subtitle: 'Receive notifications',
-                    value: notificationsEnabled,
-                    onChanged: (value) {
-                      setState(() => notificationsEnabled = value);
+                      _buildSettingItemWithSwitch(
+                        icon: Icons.notifications_outlined,
+                        iconColor: const Color(0xffe97844),
+                        iconBgColor: const Color(0xFFFFE8E0),
+                        title: 'Notifications',
+                        subtitle: 'Receive notifications',
+                        value: state.notificationsEnabled,
+                        onChanged: (value) {
+                          context.read<SettingsCubit>().toggleNotifications(value);
+                          CustomSnackBar.show(
+                            context,
+                            message: value
+                                ? 'Notifications enabled'
+                                : 'Notifications disabled',
+                            type: SnackBarType.info,
+                          );
+                        },
+                      ),
 
-                      CustomSnackBar.show(
-                        context,
-                        message: value
-                            ? 'Notifications enabled'
-                            : 'Notifications disabled',
-                        type: SnackBarType.info,
-                      );
-                    },
+                      const Divider(height: 1, indent: 90),
+
+                      _buildSettingItem(
+                        icon: Icons.help_outline,
+                        iconColor: const Color(0xffe97844),
+                        iconBgColor: const Color(0xFFFFE8E0),
+                        title: 'FAQ',
+                        subtitle: 'Frequently asked questions',
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const FAQScreen(),
+                            ),
+                          );
+                        },
+                      ),
+
+                      const Divider(height: 1, indent: 90),
+
+                      _buildSettingItem(
+                        icon: Icons.logout,
+                        iconColor: Colors.red,
+                        iconBgColor: const Color(0xFFFFE8E8),
+                        title: 'Log Out',
+                        subtitle: 'Logout from your account',
+                        onTap: () => _showLogoutDialog(context),
+                        isLast: true,
+                      ),
+                    ],
                   ),
+                ),
 
-                  const Divider(height: 1, indent: 90),
-
-                  _buildSettingItem(
-                    icon: Icons.help_outline,
-                    iconColor: const Color(0xffe97844),
-                    iconBgColor: const Color(0xFFFFE8E0),
-                    title: 'FAQ',
-                    subtitle: 'Frequently asked questions',
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => FAQScreen(),
-                        ),
-                      );
-                    },
-                  ),
-
-                  const Divider(height: 1, indent: 90),
-
-                  _buildSettingItem(
-                    icon: Icons.logout,
-                    iconColor: Colors.red,
-                    iconBgColor: const Color(0xFFFFE8E8),
-                    title: 'Log Out',
-                    subtitle: 'Logout from your account',
-                    onTap: () => _showLogoutDialog(context),
-                    isLast: true,
-                  ),
-                ],
-              ),
+                const SizedBox(height: 40),
+              ],
             ),
-
-            const SizedBox(height: 40),
-          ],
-        ),
-      ),
+          ),
+        );
+      },
     );
   }
 
@@ -263,93 +286,88 @@ class _SettingsScreenState extends State<SettingsScreen> {
     showDialog(
       context: context,
       builder: (BuildContext dialogContext) {
-        return AlertDialog(
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(20),
-          ),
-          title: const Text(
-            'Log Out',
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 20,
-            ),
-          ),
-          content: const Text(
-            'Are you sure you want to log out?',
-            style: TextStyle(fontSize: 16),
-          ),
-          actions: [
-            TextButton(
-              onPressed: () => Navigator.pop(dialogContext),
-              child: Text(
-                'Cancel',
-                style: TextStyle(
-                  color: Colors.grey[600],
-                  fontSize: 16,
-                ),
+        return BlocBuilder<SettingsCubit, SettingsState>(
+          builder: (context, state) {
+            return AlertDialog(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(20),
               ),
-            ),
-
-            ElevatedButton(
-              onPressed: () async {
-                Navigator.pop(dialogContext);
-
-                // LOADING POPUP
-                showDialog(
-                  context: context,
-                  barrierDismissible: false,
-                  builder: (_) => const Center(
-                    child: CircularProgressIndicator(
-                      color: Color(0xffe97844),
-                    ),
-                  ),
-                );
-
-                try {
-                  await Supabase.instance.client.auth.signOut();
-
-                  if (!context.mounted) return;
-
-                  Navigator.of(context, rootNavigator: true).pop();
-
-                  CustomSnackBar.show(
-                    context,
-                    message: 'Logged out successfully',
-                    type: SnackBarType.success,
-                  );
-
-                  await Future.delayed(const Duration(milliseconds: 800));
-
-                  if (!context.mounted) return;
-
-                  context.go('/register');
-                } catch (e) {
-                  if (!context.mounted) return;
-
-                  Navigator.of(context, rootNavigator: true).pop();
-
-                  CustomSnackBar.show(
-                    context,
-                    message: 'Error logging out: $e',
-                    type: SnackBarType.error,
-                  );
-                }
-              },
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.red,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10),
-                ),
-              ),
-              child: const Text(
+              title: const Text(
                 'Log Out',
                 style: TextStyle(
-                  fontSize: 16,
-                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 20,
                 ),
               ),
-            ),
-          ],
+              content: const Text(
+                'Are you sure you want to log out?',
+                style: TextStyle(fontSize: 16),
+              ),
+              actions: [
+                TextButton(
+                  onPressed: state.isLoggingOut
+                      ? null
+                      : () => Navigator.pop(dialogContext),
+                  child: Text(
+                    'Cancel',
+                    style: TextStyle(
+                      color: Colors.grey[600],
+                      fontSize: 16,
+                    ),
+                  ),
+                ),
+                ElevatedButton(
+                  onPressed: state.isLoggingOut
+                      ? null
+                      : () async {
+                          Navigator.pop(dialogContext);
+
+                          // Show loading indicator
+                          showDialog(
+                            context: context,
+                            barrierDismissible: false,
+                            builder: (_) => const Center(
+                              child: CircularProgressIndicator(
+                                color: Color(0xffe97844),
+                              ),
+                            ),
+                          );
+
+                          // Perform logout through cubit
+                          await context.read<SettingsCubit>().logout();
+
+                          if (!context.mounted) return;
+
+                          // Close loading dialog
+                          Navigator.of(context, rootNavigator: true).pop();
+                        },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.red,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                  ),
+                  child: state.isLoggingOut
+                      ? const SizedBox(
+                          width: 20,
+                          height: 20,
+                          child: CircularProgressIndicator(
+                            strokeWidth: 2,
+                            valueColor:
+                                AlwaysStoppedAnimation<Color>(Colors.white),
+                          ),
+                        )
+                      : const Text(
+                          'Log Out',
+                          style: TextStyle(
+                            fontSize: 16,
+                            color: Colors.white,
+                          ),
+                        ),
+                ),
+              ],
+            );
+          },
         );
       },
     );
