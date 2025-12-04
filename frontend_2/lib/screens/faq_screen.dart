@@ -1,74 +1,52 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:Makelti/logic/cubit/faq/faq_cubit.dart';
+import 'package:Makelti/logic/cubit/faq/faq_state.dart';
 
 class FAQScreen extends StatelessWidget {
-  final List<Map<String, String>> faqs = [
-    {
-      'question': 'How do I order a meal?',
-      'answer':
-          'Browse the available meals, select the one you like, add it to your cart, and proceed to confirmation phase.',
-    },
-    {
-      'question': 'What payment methods do you accept?',
-      'answer':
-          'we accept hand to hand payment with the seller and in the future we may add an online payment',
-    },
-    {
-      'question': 'Can I cancel my order?',
-      'answer':
-          'Yes, you can cancel your order only if the seller didint prepare it and make it as confirmed on the commands sections',
-    },
-    {
-      'question': 'How do I become a seller?',
-      'answer':
-          'Create an account, go to your profile and click "Become a seller". You will need to provide some information ',
-    },
-    {
-      'question': 'Are meals prepared on the same day?',
-      'answer':
-          'Yes, all meals are freshly prepared on the day of order by our local home cooks.',
-    },
-    {
-      'question': 'What if I have dietary restrictions?',
-      'answer':
-          'Each meal listing includes detailed ingredients and allergen information. You can also filter meals by dietary preferences.',
-    },
-    {
-      'question': 'Is there a minimum order amount?',
-      'answer':
-          'Minimum order amounts may vary by seller and location. This information is displayed before checkout.',
-    },
-  ];
-
-   FAQScreen({super.key});
+  const FAQScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-
-      appBar: AppBar(
-        elevation: 0,
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: Colors.black),
-          onPressed: () {
-            Navigator.pop(context);
-          },
-        ),
-        title: const Text('FAQ', style: TextStyle(color: Colors.black)),
-      ),
-      body: ListView.builder(
-        padding: const EdgeInsets.all(20),
-        itemCount: faqs.length,
-        itemBuilder: (context, index) {
-          return _buildFAQItem(
-            question: faqs[index]['question']!,
-            answer: faqs[index]['answer']!,
-          );
-        },
-      ),
+    return BlocBuilder<FAQCubit, FAQState>(
+      builder: (context, state) {
+        return Scaffold(
+          appBar: AppBar(
+            elevation: 0,
+            leading: IconButton(
+              icon: const Icon(Icons.arrow_back, color: Colors.black),
+              onPressed: () {
+                Navigator.pop(context);
+              },
+            ),
+            title: const Text('FAQ', style: TextStyle(color: Colors.black)),
+          ),
+          body: ListView.builder(
+            padding: const EdgeInsets.all(20),
+            itemCount: state.faqs.length,
+            itemBuilder: (context, index) {
+              final isExpanded = state.expandedItems.contains(index);
+              return _buildFAQItem(
+                context: context,
+                question: state.faqs[index]['question']!,
+                answer: state.faqs[index]['answer']!,
+                index: index,
+                isExpanded: isExpanded,
+              );
+            },
+          ),
+        );
+      },
     );
   }
 
-  Widget _buildFAQItem({required String question, required String answer}) {
+  Widget _buildFAQItem({
+    required BuildContext context,
+    required String question,
+    required String answer,
+    required int index,
+    required bool isExpanded,
+  }) {
     return Container(
       margin: const EdgeInsets.only(bottom: 16),
       decoration: BoxDecoration(
@@ -97,6 +75,10 @@ class FAQScreen extends StatelessWidget {
             ),
             child: const Icon(Icons.help_outline, color: Color(0xFFFF6B35), size: 20),
           ),
+          initiallyExpanded: isExpanded,
+          onExpansionChanged: (expanded) {
+            context.read<FAQCubit>().toggleExpanded(index);
+          },
           children: [
             Padding(
               padding: const EdgeInsets.fromLTRB(72, 0, 16, 16),

@@ -1,11 +1,35 @@
 import 'package:flutter/material.dart';
 
-class SearchBarWidget extends StatelessWidget {
-  final String title ; 
+class SearchBarWidget extends StatefulWidget {
+  final String title;
+  final ValueChanged<String>? onChanged;
+  final String? initialValue;
+  
   const SearchBarWidget({
     super.key,
-    required this.title , 
+    required this.title,
+    this.onChanged,
+    this.initialValue,
   });
+
+  @override
+  State<SearchBarWidget> createState() => _SearchBarWidgetState();
+}
+
+class _SearchBarWidgetState extends State<SearchBarWidget> {
+  late final TextEditingController _controller;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = TextEditingController(text: widget.initialValue);
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -29,8 +53,10 @@ class SearchBarWidget extends StatelessWidget {
     const SizedBox(width: 10),
      Expanded(
       child: TextField(
+        controller: _controller,
+        onChanged: widget.onChanged,
         decoration: InputDecoration(
-          hintText: title,
+          hintText: widget.title,
           hintStyle: const TextStyle(color: Color.fromARGB(255, 114, 114, 114) , fontWeight: FontWeight.w400 , fontSize:14),
           border: InputBorder.none,
         ),

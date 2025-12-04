@@ -1,6 +1,11 @@
 import 'package:Makelti/logic/cubit/addMeal/add_meal_cubit.dart';
 import 'package:Makelti/logic/cubit/meals/meal_cubit.dart';
 import 'package:Makelti/logic/cubit/orders/orders_cubit.dart';
+import 'package:Makelti/logic/cubit/faq/faq_cubit.dart';
+import 'package:Makelti/logic/cubit/profile/profile_cubit.dart';
+import 'package:Makelti/logic/cubit/posts/posts_cubit.dart';
+import 'package:Makelti/logic/cubit/stores/stores_cubit.dart';
+import 'package:Makelti/logic/cubit/settings/settings_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:Makelti/routing/app_router_congif.dart'; 
@@ -22,8 +27,13 @@ void main() async {
     MultiBlocProvider(
       providers: [
         BlocProvider(create: (_) => OrdersCubit()),
-        BlocProvider(create: (_) =>MealCubit()),
-        BlocProvider(create: (_) =>AddMealCubit()),
+        BlocProvider(create: (_) => MealCubit()),
+        BlocProvider(create: (_) => AddMealCubit()),
+        BlocProvider(create: (_) => FAQCubit()),
+        BlocProvider(create: (_) => ProfileCubit()),
+        BlocProvider(create: (_) => PostsCubit()),
+        BlocProvider(create: (_) => StoresCubit()),
+        BlocProvider(create: (_) => SettingsCubit()),
       ],
       child: const MyApp(),
     ),
