@@ -162,7 +162,6 @@ class ClientMealScreen extends StatelessWidget {
                 ),
               ),
 
-              /// ✅ Bottom Floating Buttons
               Positioned(
                 left: 0,
                 right: 0,
@@ -175,7 +174,7 @@ class ClientMealScreen extends StatelessWidget {
                       children: [
                         Container(
                           padding: const EdgeInsets.symmetric(horizontal: 4),
-                          height: 50,
+                          height: 45,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(30),
                             border:
@@ -213,7 +212,7 @@ class ClientMealScreen extends StatelessWidget {
 
                         Expanded(
                           child: Container(
-                            height: 50,
+                            height: 45,
                             decoration: BoxDecoration(
                               color: const Color(0xffe97844),
                               borderRadius: BorderRadius.circular(52),
