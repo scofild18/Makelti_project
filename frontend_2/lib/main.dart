@@ -6,6 +6,7 @@ import 'package:Makelti/logic/cubit/profile/profile_cubit.dart';
 import 'package:Makelti/logic/cubit/posts/posts_cubit.dart';
 import 'package:Makelti/logic/cubit/stores/stores_cubit.dart';
 import 'package:Makelti/logic/cubit/settings/settings_cubit.dart';
+import 'package:Makelti/logic/cubit/auth/auth_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:Makelti/routing/app_router_congif.dart'; 
@@ -15,9 +16,7 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  
   await dotenv.load(fileName: ".env");
-  
   await Supabase.initialize(
     url: dotenv.env['SUPABASE_URL']!,
     anonKey: dotenv.env['SUPABASE_ANON_KEY']!,
@@ -26,6 +25,7 @@ void main() async {
   runApp(
     MultiBlocProvider(
       providers: [
+        BlocProvider(create: (_) => AuthCubit()..checkAuthStatus()),
         BlocProvider(create: (_) => OrdersCubit()),
         BlocProvider(create: (_) => MealCubit()),
         BlocProvider(create: (_) => AddMealCubit()),
