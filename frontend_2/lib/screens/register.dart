@@ -126,7 +126,9 @@ context.read<AuthCubit>().emit(
     status: AuthStatus.success,
     userType: _userType,
   ),
-);
+);    // store the session 
+    final authCubit = context.read<AuthCubit>();
+                  authCubit.persistSession();   
       CustomSnackBar.show(
         context,
         message: 'Account created successfully!',

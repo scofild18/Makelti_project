@@ -64,6 +64,10 @@ class _LoginScreenState extends State<LoginScreen> {
                     message: 'Login successful!',
                     type: SnackBarType.success,
                   );
+                  // store teh session 
+                  final authCubit = context.read<AuthCubit>();
+                  authCubit.persistSession();   
+                  
                   context.goNamed("home"); 
                 } else if (state.status == AuthStatus.failure) {
                   CustomSnackBar.show(
