@@ -66,7 +66,7 @@ class _CookMenuScreenState extends State<CookMenuScreen> {
     return Scaffold(
       appBar: AppBar(centerTitle: false,
         title: const Text(
-                    'My Orders',
+                    'My Menu',
                     style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold , color: Colors.black),
                   ),
         actions: [
