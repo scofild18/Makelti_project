@@ -63,7 +63,7 @@ class _SplashScreenState extends State<SplashScreen>
     _animationController.forward();
 
     // Navigate to FirstScreen after delay
-   Timer(const Duration(seconds: 3), () {
+   Timer(const Duration(seconds: 1), () {
   if (mounted) {
     context.go('/register'); // or whichever route you want
   }

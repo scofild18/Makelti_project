@@ -1,18 +1,17 @@
 import 'package:Makelti/logic/cubit/orders/orders_cubit.dart';
 import 'package:Makelti/logic/cubit/orders/orders_state.dart' show OrdersState;
-import 'package:Makelti/widgets/home_screen/home_screen_appbar.dart';
 import 'package:Makelti/widgets/sliding_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class CookHomescreen extends StatefulWidget {
-  const CookHomescreen({super.key});
+class CookOrdersScreen extends StatefulWidget {
+  const CookOrdersScreen({super.key});
 
   @override
-  State<CookHomescreen> createState() => _CookHomescreenState();
+  State<CookOrdersScreen> createState() => _CookOrdersScreenState();
 }
 
-class _CookHomescreenState extends State<CookHomescreen> {
+class _CookOrdersScreenState extends State<CookOrdersScreen> {
   int selectedTab = 0;
 
   @override
@@ -29,7 +28,22 @@ class _CookHomescreenState extends State<CookHomescreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const HomeScreenAppBar(),
+                const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      SizedBox(width: 1),
+                      Text(
+                        "Order Management",
+                        style: TextStyle(
+                          fontSize: 18,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                const Divider(),
 
                 Padding(
                   padding: const EdgeInsets.all(16),
@@ -142,8 +156,6 @@ class _CookHomescreenState extends State<CookHomescreen> {
     );
   }
 }
-
-
 
 class OrderCard extends StatelessWidget {
   const OrderCard({

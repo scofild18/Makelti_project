@@ -2,6 +2,7 @@ import 'package:Makelti/logic/cubit/addMeal/add_meal_cubit.dart';
 import 'package:Makelti/logic/cubit/addMeal/add_meal_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import '../widgets/add_meal_screen/image_upload_box.dart';
 import '../widgets/add_meal_screen/custom_text_field.dart';
 import '../widgets/add_meal_screen/category_chip.dart';
@@ -71,7 +72,13 @@ class _AddMealScreenState extends State<AddMealScreen> {
         final cubit = context.read<AddMealCubit>();
 
         return Scaffold(
-          backgroundColor: const Color(0xFFFEFBF6),
+          appBar: AppBar(
+            leading: GestureDetector(
+              onTap: (){
+                context.pop() ; 
+              },
+              child: const Icon(Icons.arrow_back, color: Colors.black,)),
+          ),
           body: SafeArea(
             child: Column(
               children: [

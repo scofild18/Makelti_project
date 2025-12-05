@@ -39,6 +39,24 @@ fontFamily: GoogleFonts.poppins().fontFamily,
       foregroundColor: Colors.white,
     ),
 
+    inputDecorationTheme: InputDecorationTheme(
+      filled: true,
+      fillColor: Colors.grey.shade100,
+      contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+      border: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(12),
+        borderSide: const BorderSide(color: Color(0xffe97844)),
+      ),
+      enabledBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(12),
+        borderSide: const BorderSide(color: Color(0xffe97844)),
+      ),
+      focusedBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(12),
+        borderSide: const BorderSide(color: Color(0xffe97844), width: 2),
+      ),
+    ),
+
 
    ) ; ///  Dark Theme
   static final ThemeData dark = ThemeData(

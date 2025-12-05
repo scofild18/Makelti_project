@@ -162,7 +162,6 @@ class ClientMealScreen extends StatelessWidget {
                 ),
               ),
 
-              /// ✅ Bottom Floating Buttons
               Positioned(
                 left: 0,
                 right: 0,

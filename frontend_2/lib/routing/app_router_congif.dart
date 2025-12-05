@@ -1,18 +1,20 @@
 
 import 'package:Makelti/logic/cubit/auth/auth_cubit.dart' show AuthCubit;
+import 'package:Makelti/screens/client_orders_management.dart';
 import 'package:Makelti/screens/cook_home.dart';
+import 'package:Makelti/screens/cook_meal_screen.dart';
+import 'package:Makelti/screens/cook_menu_screen.dart';
+import 'package:Makelti/screens/cook_order_screen.dart';
 import 'package:Makelti/screens/start_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import '../screens/client_meal_screen.dart';
-import '../screens/cook_homescreen.dart';
 import '../screens/see_all_posts.dart';
 import '../screens/see_all_stores.dart';
 import '../screens/splash_screen.dart';
 import '../screens/login_screen.dart';
 import '../screens/register.dart';
-import '../screens/home_screen.dart';
 import '../screens/settings_screen.dart';
 import '../screens/profile_screen.dart';
 import '../screens/cook_profile.dart';
@@ -76,15 +78,15 @@ class AppRouterConfig {
       name: 'cook_home',
       builder: (context, state) =>  CookDashboardScreen(),
     ),
-        GoRoute(
-      path: '/add_meal',
-      name: 'add_meal',
-      builder: (context, state) => const AddMealScreen(),
+    GoRoute(
+      path: '/cook_orders',
+      name: 'cook_orders',
+      builder: (context, state) => const CookOrdersScreen(),
     ),
     GoRoute(
-      path: '/orders',
-      name: 'orders',
-      builder: (context, state) => const CookHomescreen(),
+      path: '/client_orders',
+      name: 'cleint_orders',
+      builder: (context, state) => const ClientOrdersManagement(),
     ),
     GoRoute(
       path: '/profile',
@@ -101,12 +103,22 @@ class AppRouterConfig {
       name: 'cook_profile',
       builder: (context, state) => const CookProfile(),
     ),
+      GoRoute(
+      path: '/cook_menu',
+      name: 'cook_menu',
+      builder: (context, state) => const CookMenuScreen(),
+    ),
   ],
 ),
         GoRoute(
           path: '/client_meal_screen',
           name: 'client_meal_screen',
           builder: (context, state) => const ClientMealScreen(),
+        ),
+        GoRoute(
+          path: '/cook_meal_screen',
+          name: 'cook_meal_screen',
+          builder: (context, state) => const CookMealScreen(),
         ),
         GoRoute(
           path: '/see_all_posts',
@@ -118,6 +130,11 @@ class AppRouterConfig {
           name: 'see_all_stores',
           builder: (context, state) => const SeeAllStores(),
         ),
+           GoRoute(
+      path: '/add_meal',
+      name: 'add_meal',
+      builder: (context, state) => const AddMealScreen(),
+    ),
         GoRoute(
           path: '/order',
           name: 'order',

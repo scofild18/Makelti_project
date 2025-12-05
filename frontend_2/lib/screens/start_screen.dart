@@ -13,8 +13,8 @@ class FirstScreen extends StatelessWidget {
     final userType = authCubit.state.userType; 
 
     final tabs = userType == 'cook'
-        ? ['/home', '/add_meal', '/orders', '/settings']
-        : ['/home', '/menu', '/cart', '/orders', '/settings'];
+         ?['/home', '/add_meal', '/client_orders', '/settings'] 
+        : ['/cook_home', '/cook_menu', '/cook_orders', '/settings'];
 
     final items = userType == 'cook'
         ? const [

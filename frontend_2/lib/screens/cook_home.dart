@@ -1,13 +1,12 @@
 // lib/screens/cook_dashboard_screen.dart
 import 'package:Makelti/widgets/home_screen/cook_food_card.dart';
-import 'package:Makelti/widgets/home_screen/food_card.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 class CookDashboardScreen extends StatelessWidget {
    CookDashboardScreen({super.key});
 
-  static const Color brand = Color(0xFFFF6B35); // orange brand color
+  static const Color brand = Color(0xFFFF6B35); 
 
 List<Map<String, dynamic>> get orders => [
   {
@@ -150,7 +149,7 @@ body: SafeArea(
             child: _SectionHeader(
               title: 'Orders',
               actionLabel: 'Go to Orders',
-              onTapAction: () => context.go('/orders'),
+              onTapAction: () => context.go('/cook_orders'),
               actionColor: const Color.fromARGB(255, 249, 147, 111),
             ),
           ),
@@ -187,7 +186,7 @@ body: SafeArea(
             child: _SectionHeader(
               title: 'Menu',
               actionLabel: 'Go to Menu',
-              onTapAction: () => context.go('/see_all_posts'),
+              onTapAction: () => context.go('/cook_menu'),
               actionColor:const Color.fromARGB(255, 249, 147, 111),
             ),
           ),
@@ -217,7 +216,7 @@ body: SafeArea(
                   rating: item['rating'],
                   orders: item['order'],
                   onTap: () {
-                    context.pushNamed("client_meal_screen");
+                    context.pushNamed("cook_meal_screen");
                   },
                 ),
               );
