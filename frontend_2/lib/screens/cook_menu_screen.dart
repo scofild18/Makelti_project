@@ -101,7 +101,7 @@ class _CookMenuScreenState extends State<CookMenuScreen> {
                 rating: item['rating'],
                 orders: item['order'],
                 onTap: () {
-                  context.pushNamed("client_meal_screen");
+                  context.pushNamed("cook_meal_screen");
                 },
               ),
             );
