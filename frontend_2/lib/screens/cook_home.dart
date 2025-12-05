@@ -96,9 +96,14 @@ body: SafeArea(
           Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              const CircleAvatar(
-                radius: 22,
-                backgroundImage: AssetImage("assets/images/pizza_store.jpg"),
+              GestureDetector(
+                onTap: () {
+                  context.go("/cook_profile");
+                },
+                child: const CircleAvatar(
+                  radius: 22,
+                  backgroundImage: AssetImage("assets/images/pizza_store.jpg"),
+                ),
               ),
               const SizedBox(width: 12),
               Expanded(
@@ -333,7 +338,7 @@ class OrderCard extends StatelessWidget {
   food,
   style: const TextStyle(
     fontSize: 14,
-    fontWeight: FontWeight.w600,
+    fontWeight: FontWeight.w500,
   ),
   maxLines: 2, 
   overflow: TextOverflow.ellipsis, 
@@ -345,7 +350,7 @@ class OrderCard extends StatelessWidget {
               Expanded(
                 child: Text(
                   client,
-                  style: const TextStyle(fontSize: 13, color: Colors.black87),
+                  style: const TextStyle(fontSize: 13, color: Color.fromARGB(221, 64, 64, 64)),
                   overflow: TextOverflow.ellipsis,
                 ),
               ),

@@ -13,23 +13,22 @@ class FirstScreen extends StatelessWidget {
     final userType = authCubit.state.userType; 
 
     final tabs = userType == 'cook'
-         ?['/home', '/add_meal', '/client_orders', '/settings'] 
-        : ['/cook_home', '/cook_menu', '/cook_orders', '/settings'];
+         ?['/cook_home', '/cook_menu', '/cook_orders', '/settings']
+         :['/home', '/client_favourites', '/client_orders', '/settings'] ;
 
     final items = userType == 'cook'
-        ? const [
-            BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-            BottomNavigationBarItem(icon: Icon(Icons.lunch_dining), label: 'favorites'),
-            BottomNavigationBarItem(icon: Icon(Icons.shopping_bag_outlined), label: 'Orders'),
-            BottomNavigationBarItem(icon: Icon(Icons.settings), label: 'Settings'),
-          ]
-        : const [
+     ? const [
             BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
             BottomNavigationBarItem(icon: Icon(Icons.restaurant_menu), label: 'Menu'),
             BottomNavigationBarItem(icon: Icon(Icons.shopping_bag_outlined), label: 'Orders'),
 
             BottomNavigationBarItem(icon: Icon(Icons.settings), label: 'Settings'),
-          ];
+          ]: const [
+            BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
+            BottomNavigationBarItem(icon: Icon(Icons.lunch_dining), label: 'favorites'),
+            BottomNavigationBarItem(icon: Icon(Icons.shopping_bag_outlined), label: 'Orders'),
+            BottomNavigationBarItem(icon: Icon(Icons.settings), label: 'Settings'),
+          ] ;
 
     int calculateSelectedIndex() {
       final location = GoRouterState.of(context).uri.toString();

@@ -1,10 +1,13 @@
 
 import 'package:Makelti/logic/cubit/auth/auth_cubit.dart' show AuthCubit;
+import 'package:Makelti/screens/client_favourites_screen.dart';
 import 'package:Makelti/screens/client_orders_management.dart';
 import 'package:Makelti/screens/cook_home.dart';
 import 'package:Makelti/screens/cook_meal_screen.dart';
 import 'package:Makelti/screens/cook_menu_screen.dart';
 import 'package:Makelti/screens/cook_order_screen.dart';
+import 'package:Makelti/screens/home_screen.dart';
+import 'package:Makelti/screens/splash_screen.dart';
 import 'package:Makelti/screens/start_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -12,7 +15,6 @@ import 'package:go_router/go_router.dart';
 import '../screens/client_meal_screen.dart';
 import '../screens/see_all_posts.dart';
 import '../screens/see_all_stores.dart';
-import '../screens/splash_screen.dart';
 import '../screens/login_screen.dart';
 import '../screens/register.dart';
 import '../screens/settings_screen.dart';
@@ -36,16 +38,13 @@ class NotFoundPage extends StatelessWidget {
 
 class AppRouterConfig {
   static GoRouter getRouter(BuildContext context) {
-    final authCubit = context.read<AuthCubit>();
-     final userType = authCubit.state.userType;
-
     return GoRouter(
       initialLocation: '/',
       routes: [
         GoRoute(
           path: '/',
           name: 'start',
-          builder: (context, state) =>  const SplashScreen(),
+          builder: (context, state) =>    const SplashScreen(),
         ),
         GoRoute(
           path: '/login',
@@ -63,16 +62,16 @@ class AppRouterConfig {
   builder: (context, state, child) {
     return FirstScreen(child: child);
   },
-  routes: [
-    GoRoute(
-          path: '/home',
-          name: 'home',
-          builder: (context, state) =>   CookDashboardScreen(),
-          redirect: (context, state) {
-            if (userType == 'cook') return '/cook_home';
-            return null; 
-          },
-        ),
+        routes: [
+        GoRoute(
+        path: '/home',
+        name: 'home',
+        builder: (context, state) {
+          final authCubit = context.read<AuthCubit>();
+          final userType = authCubit.state.userType;
+          return userType == 'cook' ? CookDashboardScreen() : const HomeScreen();
+        },
+      ),
     GoRoute(
       path: '/cook_home',
       name: 'cook_home',
@@ -97,6 +96,11 @@ class AppRouterConfig {
       path: '/settings',
       name: 'settings',
       builder: (context, state) => const SettingsScreen(),
+    ),
+    GoRoute(
+      path: '/client_favourites',
+      name: 'client_favourites',
+      builder: (context, state) => const ClientFavouritesScreen(),
     ),
     GoRoute(
       path: '/cook_profile',

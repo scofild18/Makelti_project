@@ -64,8 +64,11 @@ class _CookMenuScreenState extends State<CookMenuScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('My Menu' ,style: TextStyle(color: Colors.black), ),
+      appBar: AppBar(centerTitle: false,
+        title: const Text(
+                    'My Orders',
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold , color: Colors.black),
+                  ),
         actions: [
           IconButton(
             icon: const Icon(Icons.add , color: Colors.black,),

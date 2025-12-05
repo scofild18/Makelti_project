@@ -13,7 +13,7 @@ class HomeScreenAppBar extends StatelessWidget {
             const Row(
               children: [
                 CircleAvatar(
-                  radius: 18,
+                  radius: 20,
                   backgroundImage: AssetImage("assets/images/pizza_store.jpg"),
                 ),
                 SizedBox(width: 12),
