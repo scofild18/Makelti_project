@@ -1,5 +1,6 @@
 
 import 'package:Makelti/logic/cubit/auth/auth_cubit.dart' show AuthCubit;
+import 'package:Makelti/screens/client_cook_profile.dart';
 import 'package:Makelti/screens/client_favourites_screen.dart';
 import 'package:Makelti/screens/client_orders_management.dart';
 import 'package:Makelti/screens/cook_home.dart';
@@ -106,6 +107,11 @@ class AppRouterConfig {
       path: '/cook_profile',
       name: 'cook_profile',
       builder: (context, state) => const CookProfile(),
+    ),
+    GoRoute(
+      path: '/client_cook_profile',
+      name: 'client_cook_profile',
+      builder: (context, state) => const ClientCookProfile(),
     ),
       GoRoute(
       path: '/cook_menu',

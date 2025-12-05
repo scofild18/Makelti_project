@@ -223,7 +223,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     rating: store['rating'].toDouble(),
                     image: store['image'],
                     onTap: () {
-                      context.goNamed('cook_profile');
+                      context.goNamed('client_cook_profile');
                     },
                   );
                 },
