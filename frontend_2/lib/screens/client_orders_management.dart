@@ -68,7 +68,7 @@ class _ClientOrdersManagementState extends State<ClientOrdersManagement> {
                             ),
                             minimumSize: const Size(double.infinity, 38),
                           ),
-                          child: const Text("Picked"),
+                          child: const Text("Picked", style: TextStyle(color: Colors.white),),
                         );
                       }
 

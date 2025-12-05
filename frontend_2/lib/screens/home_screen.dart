@@ -153,7 +153,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 crossAxisCount: 2,
                 mainAxisSpacing: 14,
                 crossAxisSpacing: 14,
-                childAspectRatio: 0.78,
+                childAspectRatio: 0.76,
               ),
               itemBuilder: (context, index) {
                 final item = recentPosts[index];

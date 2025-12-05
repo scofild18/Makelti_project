@@ -86,7 +86,7 @@ class _CookOrdersScreenState extends State<CookOrdersScreen> {
                                   cubit.cookUpdateOrderStatus(order, "accepted");
                                 },
                                 icon: const Icon(Icons.check, color: Colors.white),
-                                label: const Text("Accept"),
+                                label: const Text("Accept" , style: TextStyle(color: Colors.white)),
                                 style: ElevatedButton.styleFrom(
                                   backgroundColor: const Color(0xff89a979),
                                   shape: RoundedRectangleBorder(
@@ -109,7 +109,7 @@ class _CookOrdersScreenState extends State<CookOrdersScreen> {
                             ),
                             minimumSize: const Size(double.infinity, 38),
                           ),
-                          child: const Text("Mark as Ready"),
+                          child: const Text("Mark as Ready" , style: TextStyle(color: Colors.white)),
                         );
                       } else if (order.status == "ready") {
                         buttons = ElevatedButton.icon(
@@ -117,7 +117,7 @@ class _CookOrdersScreenState extends State<CookOrdersScreen> {
                             cubit.cookUpdateOrderStatus(order, "delivered");
                           },
                           icon: const Icon(Icons.check, color: Colors.white),
-                          label: const Text("Mark as Delivered"),
+                          label: const Text("Mark as Delivered" ,style: TextStyle(color: Colors.white)),
                           style: ElevatedButton.styleFrom(
                             backgroundColor: const Color(0xff89a979),
                             shape: RoundedRectangleBorder(
