@@ -1,11 +1,12 @@
 
 import 'package:Makelti/logic/cubit/auth/auth_cubit.dart' show AuthCubit;
+import 'package:Makelti/screens/cook_home.dart';
 import 'package:Makelti/screens/start_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import '../screens/client_meal_screen.dart';
-import '../screens/cook_orders_management.dart';
+import '../screens/cook_homescreen.dart';
 import '../screens/see_all_posts.dart';
 import '../screens/see_all_stores.dart';
 import '../screens/splash_screen.dart';
@@ -42,7 +43,7 @@ class AppRouterConfig {
         GoRoute(
           path: '/',
           name: 'start',
-          builder: (context, state) => const SplashScreen(),
+          builder: (context, state) =>  const SplashScreen(),
         ),
         GoRoute(
           path: '/login',
@@ -64,7 +65,7 @@ class AppRouterConfig {
     GoRoute(
           path: '/home',
           name: 'home',
-          builder: (context, state) =>  const HomeScreen(),
+          builder: (context, state) =>   CookDashboardScreen(),
           redirect: (context, state) {
             if (userType == 'cook') return '/cook_home';
             return null; 
@@ -73,7 +74,7 @@ class AppRouterConfig {
     GoRoute(
       path: '/cook_home',
       name: 'cook_home',
-      builder: (context, state) => const CookOrdersManagement(),
+      builder: (context, state) =>  CookDashboardScreen(),
     ),
         GoRoute(
       path: '/add_meal',
@@ -83,7 +84,7 @@ class AppRouterConfig {
     GoRoute(
       path: '/orders',
       name: 'orders',
-      builder: (context, state) => const CookOrdersManagement(),
+      builder: (context, state) => const CookHomescreen(),
     ),
     GoRoute(
       path: '/profile',
