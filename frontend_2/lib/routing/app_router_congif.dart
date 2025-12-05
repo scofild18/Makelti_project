@@ -38,10 +38,10 @@ class AppRouterConfig {
     initialLocation: '/',
     routes: [
       GoRoute(
-  path: '/',
-  name: 'start',
-  builder: (context, state) => const SplashScreen(),
-),
+        path: '/',
+        name: 'start',
+        builder: (context, state) => const SplashScreen(),
+      ),
       GoRoute(
         path: '/login',
         name: 'login',
@@ -54,61 +54,61 @@ class AppRouterConfig {
       ),
 
      ShellRoute(
-  builder: (context, state, child) {
-    return FirstScreen(child: child);
-  },
-  routes: [
-    GoRoute(
-      path: '/home',
-      name: 'home',
-      builder: (context, state) => const HomeScreen(),
+      builder: (context, state, child) {
+        return FirstScreen(child: child);
+      },
+      routes: [
+        GoRoute(
+          path: '/home',
+          name: 'home',
+          builder: (context, state) => const HomeScreen(),
+        ),
+        GoRoute(
+          path: '/add_meal',
+          name: 'add_meal',
+          builder: (context, state) => const AddMealScreen(),
+        ),
+        GoRoute(
+          path: '/orders',
+          name: 'orders',
+          builder: (context, state) => const CookOrdersManagement(),
+        ),
+        GoRoute(
+          path: '/profile',
+          name: 'profile',
+          builder: (context, state) => const ProfileScreen(),
+        ),
+        GoRoute(
+          path: '/settings',
+          name: 'settings',
+          builder: (context, state) => const SettingsScreen(),
+        ),
+        GoRoute(
+          path: '/cook_profile',
+          name: 'cook_profile',
+          builder: (context, state) => const CookProfile(),
+        ),
+      ],
     ),
-    GoRoute(
-      path: '/add_meal',
-      name: 'add_meal',
-      builder: (context, state) => const AddMealScreen(),
-    ),
-    GoRoute(
-      path: '/orders',
-      name: 'orders',
-      builder: (context, state) => const CookOrdersManagement(),
-    ),
-    GoRoute(
-      path: '/profile',
-      name: 'profile',
-      builder: (context, state) => const ProfileScreen(),
-    ),
-    GoRoute(
-      path: '/settings',
-      name: 'settings',
-      builder: (context, state) => const SettingsScreen(),
-    ),
-    GoRoute(
-      path: '/cook_profile',
-      name: 'cook_profile',
-      builder: (context, state) => const CookProfile(),
-    ),
-  ],
-),
 
 
-GoRoute(
+      GoRoute(
         path: '/client_meal_screen',
         name: 'client_meal_screen',
         builder: (context, state) =>  const ClientMealScreen(),
       ),
 
-GoRoute(
+      GoRoute(
         path: '/see_all_posts',
         name: 'see_all_posts',
-        builder: (context, state) =>  SeeAllPostsScreen(),
+        builder: (context, state) =>  const SeeAllPostsScreen(),
       ),
 
 
       GoRoute(
         path: '/see_all_stores',
         name: 'see_all_stores',
-        builder: (context, state) =>  SeeAllStores(),
+        builder: (context, state) =>  const SeeAllStores(),
       ),
 
       GoRoute(
@@ -124,7 +124,7 @@ GoRoute(
       GoRoute(
         path: '/faq',
         name: 'faq',
-        builder: (context, state) => FAQScreen(),
+        builder: (context, state) => const FAQScreen(),
       ),
       
     ],
