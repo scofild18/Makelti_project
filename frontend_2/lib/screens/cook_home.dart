@@ -86,6 +86,7 @@ final List<Map<String, dynamic>> recentPosts = [
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      
 body: SafeArea(
   child: SingleChildScrollView(
     child: Padding(

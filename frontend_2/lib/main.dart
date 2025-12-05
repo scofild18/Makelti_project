@@ -11,6 +11,7 @@ import 'package:Makelti/services/auth_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:Makelti/routing/app_router_congif.dart'; 
+import 'utils/application_theme.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
@@ -51,6 +52,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp.router(
       debugShowCheckedModeBanner: false,
       title: 'Makelti',
+      theme: AppTheme.light,
       routerConfig: router,
     );
   }
