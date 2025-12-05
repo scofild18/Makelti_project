@@ -39,6 +39,11 @@ dependencies:
   http: ^1.5.0
   google_fonts: ^6.3.0
   go_router: ^16.3.0
+  flutter_bloc: ^9.1.1
+  supabase_flutter: ^2.10.3
+  flutter_dotenv: ^6.0.0
+  sqflite: ^2.4.2
+  path: ^1.9.1
 
 dev_dependencies:
   flutter_test:
@@ -66,9 +71,13 @@ flutter:
   assets:
     - assets/images/pasta.png
     - assets/images/salad.jpg
+
     - assets/images/logo.png
     - assets/images/pizza_store.jpg
     - assets/images/store.jpg
+    - assets/icons/location.png
+    - .env
+
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
 

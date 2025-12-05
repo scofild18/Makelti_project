@@ -30,21 +30,15 @@ class FoodImageHeader extends StatelessWidget {
               bottomRight: Radius.circular(30),
             ),
           ),
-          child: ClipRRect(
-            borderRadius: const BorderRadius.only(
-              bottomLeft: Radius.circular(30),
-              bottomRight: Radius.circular(30),
-            ),
-            child: Image.network(
-              imageUrl,
-              fit: BoxFit.cover,
-              errorBuilder: (context, error, stackTrace) {
-                return Container(
-                  color: Colors.grey[300],
-                  child: const Icon(Icons.restaurant, size: 80),
-                );
-              },
-            ),
+          child: Image.network(
+            imageUrl,
+            fit: BoxFit.cover,
+            errorBuilder: (context, error, stackTrace) {
+              return Container(
+                color: Colors.grey[300],
+                child: const Icon(Icons.restaurant, size: 80),
+              );
+            },
           ),
         ),
         // Price Badge
@@ -57,7 +51,7 @@ class FoodImageHeader extends StatelessWidget {
               vertical: 8,
             ),
             decoration: BoxDecoration(
-              color: Colors.deepOrange,
+              color: const Color(0xffe97844),
               borderRadius: BorderRadius.circular(20),
             ),
             child: Text(

@@ -1,4 +1,6 @@
+import 'package:Makelti/logic/cubit/auth/auth_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'dart:async';
 
@@ -63,11 +65,19 @@ class _SplashScreenState extends State<SplashScreen>
     _animationController.forward();
 
     // Navigate to FirstScreen after delay
-   Timer(const Duration(seconds: 3), () {
-  if (mounted) {
-    context.go('/home'); // or whichever route you want
-  }
-});
+   Timer(const Duration(seconds: 1), ()  async {
+  
+  final authCubit = context.read<AuthCubit>();
+
+  await authCubit.restoreSession();
+
+  final userType = authCubit.state.userType;
+
+  if (userType != null) {
+    context.go('/home');
+  } else {
+    context.go('/login');
+}});
   }
 
   @override

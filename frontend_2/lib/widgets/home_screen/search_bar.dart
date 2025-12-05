@@ -1,15 +1,41 @@
 import 'package:flutter/material.dart';
 
-class SearchBarWidget extends StatelessWidget {
+class SearchBarWidget extends StatefulWidget {
+  final String title;
+  final ValueChanged<String>? onChanged;
+  final String? initialValue;
+  
   const SearchBarWidget({
     super.key,
+    required this.title,
+    this.onChanged,
+    this.initialValue,
   });
+
+  @override
+  State<SearchBarWidget> createState() => _SearchBarWidgetState();
+}
+
+class _SearchBarWidgetState extends State<SearchBarWidget> {
+  late final TextEditingController _controller;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = TextEditingController(text: widget.initialValue);
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Container(
-          margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
+          margin: const EdgeInsets.symmetric(horizontal: 0, vertical: 8),
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 0),
           decoration: BoxDecoration(
             color: const Color.fromARGB(255, 255, 255, 255),
             borderRadius: BorderRadius.circular(30),
@@ -25,11 +51,13 @@ class SearchBarWidget extends StatelessWidget {
             children: [
     const Icon(Icons.search, color: Color.fromARGB(255, 72, 72, 72), size: 24),
     const SizedBox(width: 10),
-    const Expanded(
+     Expanded(
       child: TextField(
+        controller: _controller,
+        onChanged: widget.onChanged,
         decoration: InputDecoration(
-          hintText: 'Search food or store...',
-          hintStyle: TextStyle(color: Color.fromARGB(255, 114, 114, 114) , fontWeight: FontWeight.w400 , fontSize:14),
+          hintText: widget.title,
+          hintStyle: const TextStyle(color: Color.fromARGB(255, 114, 114, 114) , fontWeight: FontWeight.w400 , fontSize:14),
           border: InputBorder.none,
         ),
       ),

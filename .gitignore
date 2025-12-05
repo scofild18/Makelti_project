@@ -1,2 +1,11 @@
 .idea/
 .vscode/
+backend/.env
+backend/.venv
+backend/app/__pycache__
+frontend_2/.env
+.git/
+backend/app/crud/__pycache__/
+backend/app/models/__pycache__/
+backend/app/__pycache__/
+backend/app/api/__pycache__/

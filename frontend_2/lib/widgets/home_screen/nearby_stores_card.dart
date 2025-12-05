@@ -50,44 +50,42 @@ class NearbyStoresCard extends StatelessWidget {
          
             Padding(
               padding: const EdgeInsets.all(10.0),
-              child: Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      name,
-                      overflow: TextOverflow.ellipsis,
-                      style: const TextStyle(
-                        fontWeight: FontWeight.w600,
-                        fontSize: 14,
-                      ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    name,
+                    overflow: TextOverflow.ellipsis,
+                    style: const TextStyle(
+                      fontWeight: FontWeight.w600,
+                      fontSize: 14,
+                    ),
+                  ),
+                  
+                  Padding(
+                    padding: const EdgeInsets.only(top: 8.0 , bottom: 8 ),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          distance,
+                          style: const TextStyle(color: Colors.grey, fontSize: 12),
+                        ),
+                        Row(
+                      children: [
+                        const Icon(Icons.star, color: Colors.amber, size: 16),
+                        const SizedBox(width: 4),
+                        Text(rating.toString(),
+                            style: const TextStyle(fontSize: 12)),
+                      ],
                     ),
                     
-                    Padding(
-                      padding: const EdgeInsets.only(top: 8.0 , bottom: 8 ),
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.end,
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            distance,
-                            style: const TextStyle(color: Colors.grey, fontSize: 12),
-                          ),
-                          Row(
-                        children: [
-                          const Icon(Icons.star, color: Colors.amber, size: 16),
-                          const SizedBox(width: 4),
-                          Text(rating.toString(),
-                              style: const TextStyle(fontSize: 12)),
-                        ],
-                      ),
-                      
-                        ],
-                      ),
+                      ],
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             ),
           ],

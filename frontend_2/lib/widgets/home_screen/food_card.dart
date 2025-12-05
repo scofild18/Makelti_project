@@ -72,7 +72,7 @@ class FoodCard extends StatelessWidget {
             Expanded(
               child: Padding(
                 padding: const EdgeInsets.only(
-                    top: 20.0, left: 12, right: 12,),
+                    top: 8.0, left: 8, right: 8,),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -93,9 +93,6 @@ class FoodCard extends StatelessWidget {
                     ),
                       ],
                     ),
-                    
-                    
-                    const SizedBox(height: 6),
                                     Padding(
                                       padding: const EdgeInsets.only(left  : 2.0 , top: 6 ),
                                       child: Padding(
