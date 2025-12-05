@@ -4,16 +4,15 @@ import 'package:Makelti/widgets/sliding_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class CookOrdersManagement extends StatefulWidget {
-  const CookOrdersManagement({super.key});
+class CookOrdersScreen extends StatefulWidget {
+  const CookOrdersScreen({super.key});
 
   @override
-  State<CookOrdersManagement> createState() => _CookOrdersManagementState();
+  State<CookOrdersScreen> createState() => _CookOrdersScreenState();
 }
 
-class _CookOrdersManagementState extends State<CookOrdersManagement> {
+class _CookOrdersScreenState extends State<CookOrdersScreen> {
   int selectedTab = 0;
-
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<OrdersCubit, OrdersState>(
@@ -29,21 +28,17 @@ class _CookOrdersManagementState extends State<CookOrdersManagement> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      SizedBox(width: 12),
-                      Text(
-                        "Order Management",
-                        style: TextStyle(
-                          fontSize: 18,
-                        ),
-                      ),
-                    ],
+              padding: EdgeInsets.only(left: 12.0, top: 12),
+              child: Row(
+                children: [
+                  SizedBox(width: 12),
+                  Text(
+                    'my Orders',
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                   ),
-                ),
-                const Divider(),
+                ],
+              ),
+            ),
 
                 Padding(
                   padding: const EdgeInsets.all(16),

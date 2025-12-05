@@ -35,13 +35,12 @@ class _ClientOrdersManagementState extends State<ClientOrdersManagement> {
                     children: [
                       SizedBox(width: 12),
                       Text(
-                        "My Orders",
-                        style: TextStyle(fontSize: 18),
-                      ),
+                    'My Orders',
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  ),
                     ],
                   ),
                 ),
-                const Divider(),
 
                 Padding(
                   padding: const EdgeInsets.all(16),

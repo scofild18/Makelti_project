@@ -1,49 +1,60 @@
+import 'package:Makelti/logic/cubit/auth/auth_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class FirstScreen extends StatelessWidget {
   final Widget child;
   const FirstScreen({super.key, required this.child});
 
-  // Define your tab routes
-  static const List<String> _tabs = [
-    '/home',
-    '/add_meal',
-    '/orders',
-    '/settings',
-  ];
-
-  int _calculateSelectedIndex(BuildContext context) {
-    final location = GoRouterState.of(context).uri.toString();
-    if (location.startsWith('/add_meal')) return 1;
-    if (location.startsWith('/orders')) return 2;
-    if (location.startsWith('/settings')) return 3;
-    return 0;
-  }
-
-  void _onItemTapped(BuildContext context, int index) {
-    context.go(_tabs[index]);
-  }
-
   @override
   Widget build(BuildContext context) {
-    final selectedIndex = _calculateSelectedIndex(context);
+    final authCubit = context.read<AuthCubit>();
+    final userType = authCubit.state.userType; 
+
+    final tabs = userType == 'cook'
+         ?['/cook_home', '/cook_menu', '/cook_orders', '/settings']
+         :['/home', '/client_favourites', '/client_orders', '/settings'] ;
+
+    final items = userType == 'cook'
+     ? const [
+            BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
+            BottomNavigationBarItem(icon: Icon(Icons.restaurant_menu), label: 'Menu'),
+            BottomNavigationBarItem(icon: Icon(Icons.shopping_bag_outlined), label: 'Orders'),
+
+            BottomNavigationBarItem(icon: Icon(Icons.settings), label: 'Settings'),
+          ]: const [
+            BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
+            BottomNavigationBarItem(icon: Icon(Icons.lunch_dining), label: 'favorites'),
+            BottomNavigationBarItem(icon: Icon(Icons.shopping_bag_outlined), label: 'Orders'),
+            BottomNavigationBarItem(icon: Icon(Icons.settings), label: 'Settings'),
+          ] ;
+
+    int calculateSelectedIndex() {
+      final location = GoRouterState.of(context).uri.toString();
+      for (var i = 0; i < tabs.length; i++) {
+        if (location.startsWith(tabs[i])) return i;
+      }
+      return 0;
+    }
+
+    void onItemTapped(int index) {
+      context.go(tabs[index]);
+    }
+
+    final selectedIndex = calculateSelectedIndex();
 
     return Scaffold(
       body: SafeArea(child: child),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: selectedIndex,
-        onTap: (index) => _onItemTapped(context, index),
+        type: BottomNavigationBarType.fixed, 
+        onTap: onItemTapped,
         backgroundColor: Colors.white,
         selectedItemColor: Colors.orange,
         unselectedItemColor: Colors.grey,
         showUnselectedLabels: true,
-        items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-          BottomNavigationBarItem(icon: Icon(Icons.lunch_dining), label: 'Add meal'),
-          BottomNavigationBarItem(icon: Icon(Icons.shopping_bag_outlined), label: 'Orders'),
-          BottomNavigationBarItem(icon: Icon(Icons.settings), label: 'Settings'),
-        ],
+        items: items,
       ),
     );
   }

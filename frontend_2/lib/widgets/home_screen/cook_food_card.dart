@@ -1,0 +1,129 @@
+import 'package:flutter/material.dart';
+
+class CookFoodCard extends StatelessWidget {
+  const CookFoodCard({
+    super.key,
+    required this.image,
+    required this.price,
+    required this.title,
+    required this.store,
+    required this.rating,
+    required this.orders,
+    this.onTap,
+  });
+
+  final String image;
+  final String price;
+  final String title;
+  final String store;
+  final double rating;
+  final int orders;
+  final VoidCallback? onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(16),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.05),
+              blurRadius: 6,
+              offset: const Offset(0, 3),
+            ),
+          ],
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Stack(
+              children: [
+                ClipRRect(
+                  borderRadius:
+                      const BorderRadius.vertical(top: Radius.circular(16)),
+                  child: Image.asset(
+                    image,
+                    height: 100,
+                    width: double.infinity,
+                    fit: BoxFit.cover,
+                  ),
+                ),
+                Positioned(
+                  right: 8,
+                  top: 8,
+                  child: Container(
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                    decoration: BoxDecoration(
+                      color: Colors.white.withOpacity(0.9),
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: Text(
+                      price,
+                      style: const TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.only(
+                    top: 8.0, left: 8, right: 8,),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          title,
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
+                          style: const TextStyle(fontWeight: FontWeight.w600),
+                        ),
+                        const SizedBox(height: 4),
+                    Text(
+                      store,
+                      style: const TextStyle(fontSize: 12, color: Colors.grey),
+                    ),
+                      ],
+                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.only(left  : 2.0 , top: 6 ),
+                                      child: Padding(
+                                        padding: const EdgeInsets.only(bottom: 12.0),
+                                        child: Row(
+                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                          children: [
+                                                            Row(
+                                                              children: [
+                                                                const Icon(Icons.star, color: Colors.amber, size: 16),
+                                                                 Text(rating.toString()),
+                                                              ],
+                                                            ),
+                                                           
+                                                            const SizedBox(width: 6),
+                                                            Text(
+                                                              "${orders.toString()} orders",
+                                                              style: const TextStyle(fontSize: 12),
+                                                            ),
+                                                          ],
+                                        ),
+                                      ),
+                                    ),
+                    
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}

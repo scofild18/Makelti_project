@@ -1,8 +1,11 @@
 import 'dart:convert';
+import 'package:Makelti/logic/cubit/auth/auth_cubit.dart';
+import 'package:Makelti/logic/cubit/auth/auth_state.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:http/http.dart' as http;
-import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:supabase_flutter/supabase_flutter.dart' hide AuthState;
 import 'package:Makelti/widgets/custom_snackbar.dart';
 
 class RegisterScreen extends StatefulWidget {
@@ -118,6 +121,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
       }
 
       if (!mounted) return;
+context.read<AuthCubit>().emit(
+  AuthState(
+    status: AuthStatus.success,
+    userType: _userType,
+  ),
+);
       CustomSnackBar.show(
         context,
         message: 'Account created successfully!',
