@@ -1,3 +1,3 @@
 # app/crud/__init__.py
-# import user CRUD
-from app.crud import user
+# Import CRUD modules
+from app.crud import user, cook
