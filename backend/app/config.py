@@ -11,6 +11,11 @@ class Settings(BaseSettings):
     SUPABASE_URL: str
     SUPABASE_KEY: str
     SUPABASE_JWT_SECRET: str
+
+    # Cloudinary
+    CLOUDINARY_CLOUD_NAME: str
+    CLOUDINARY_API_KEY: str
+    CLOUDINARY_API_SECRET: str
     
     # JWT
     SECRET_KEY: str = "change-me-in-production"
@@ -24,7 +29,7 @@ class Settings(BaseSettings):
         env_file = ".env"
         case_sensitive = True
 
-
+settings = Settings()
 @lru_cache()
 def get_settings() -> Settings:
     return Settings()

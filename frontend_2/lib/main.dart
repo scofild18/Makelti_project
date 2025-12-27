@@ -15,6 +15,10 @@ import 'utils/application_theme.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
+import 'package:cloudinary_url_gen/cloudinary.dart';
+import 'package:cloudinary_flutter/image/cld_image.dart';
+import 'package:cloudinary_flutter/cloudinary_context.dart';
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   
@@ -25,6 +29,11 @@ void main() async {
     anonKey: dotenv.env['SUPABASE_ANON_KEY']!,
   );
   
+  // ignore: deprecated_member_use
+  CloudinaryContext.cloudinary =
+      Cloudinary.fromCloudName(cloudName: 'dyca7imgp');
+
+  
   runApp(
     MultiBlocProvider(
       providers: [
@@ -32,7 +41,11 @@ void main() async {
         BlocProvider(create: (_) => MealCubit()),
         BlocProvider(create: (_) => AddMealCubit()),
         BlocProvider(create: (_) => FAQCubit()),
-        BlocProvider(create: (_) => ProfileCubit()),
+        BlocProvider(
+          create: (_) => ProfileCubit(
+            supabase: Supabase.instance.client, 
+          ),
+        ),
         BlocProvider(create: (_) => PostsCubit()),
         BlocProvider(create: (_) => StoresCubit()),
         BlocProvider(create: (_) => SettingsCubit()),

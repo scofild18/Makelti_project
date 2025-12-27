@@ -9,3 +9,5 @@ email-validator
 python-jose[cryptography]
 passlib[bcrypt]
 supabase
+cloudinary
+python-multipart

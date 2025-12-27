@@ -1,44 +1,58 @@
-// lib/screens/cook_dashboard_screen.dart
 import 'package:Makelti/widgets/home_screen/cook_food_card.dart';
+import 'package:Makelti/widgets/user_avatar_header.dart';  // ✅ Add this
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';  // ✅ Add this
 import 'package:go_router/go_router.dart';
+import 'package:Makelti/logic/cubit/profile/profile_cubit.dart';  // ✅ Add this
 
-class CookDashboardScreen extends StatelessWidget {
-   CookDashboardScreen({super.key});
+class CookDashboardScreen extends StatefulWidget {
+  const CookDashboardScreen({super.key});
 
-  static const Color brand = Color(0xFFFF6B35); 
+  @override
+  State<CookDashboardScreen> createState() => _CookDashboardScreenState();
+}
 
-List<Map<String, dynamic>> get orders => [
-  {
-    'id': '34621',
-    'food': 'Taam (Couscous with Raisins and Butter)',
-    'client': 'John Doe',
-    'qty': 2,
-    'status': 'waiting',
-  },
-  {
-    'id': '34622',
-    'food': 'Grilled Meat',
-    'client': 'Sara Lee',
-    'qty': 1,
-    'status': 'cooking',
-  },
-  {
-    'id': '34623',
-    'food': 'Avocado Salad',
-    'client': 'Ali Hassan',
-    'qty': 3,
-    'status': 'waiting',
-  },
-];
+class _CookDashboardScreenState extends State<CookDashboardScreen> {
+  static const Color brand = Color(0xFFFF6B35);
 
-final List<Map<String, dynamic>> recentPosts = [
+  @override
+  void initState() {
+    super.initState();
+    // ✅ Load profile data when screen opens
+    context.read<ProfileCubit>().loadUserProfile();
+  }
+
+  List<Map<String, dynamic>> get orders => [
+        {
+          'id': '34621',
+          'food': 'Taam (Couscous with Raisins and Butter)',
+          'client': 'John Doe',
+          'qty': 2,
+          'status': 'waiting',
+        },
+        {
+          'id': '34622',
+          'food': 'Grilled Meat',
+          'client': 'Sara Lee',
+          'qty': 1,
+          'status': 'cooking',
+        },
+        {
+          'id': '34623',
+          'food': 'Avocado Salad',
+          'client': 'Ali Hassan',
+          'qty': 3,
+          'status': 'waiting',
+        },
+      ];
+
+  final List<Map<String, dynamic>> recentPosts = [
     {
       'title': 'Mhajeb ',
       'store': 'Maria Kitchen',
       'price': '250 da',
       'rating': 4.8,
-      "order": 3 , 
+      "order": 3,
       'image': 'assets/images/salad.jpg'
     },
     {
@@ -46,7 +60,7 @@ final List<Map<String, dynamic>> recentPosts = [
       'store': 'Maria Kitchen',
       'price': '340 da',
       'rating': 4.9,
-      "order": 3 , 
+      "order": 3,
       'image': 'assets/images/pasta.png'
     },
     {
@@ -54,7 +68,7 @@ final List<Map<String, dynamic>> recentPosts = [
       'store': 'Maria Kitchen',
       'price': '250 da',
       'rating': 5.0,
-      "order": 3 , 
+      "order": 3,
       'image': 'assets/images/pasta.png'
     },
     {
@@ -62,7 +76,7 @@ final List<Map<String, dynamic>> recentPosts = [
       'store': 'Maria Kitchen',
       'price': '145 da',
       'rating': 4.7,
-      "order": 3 , 
+      "order": 3,
       'image': 'assets/images/salad.jpg'
     },
     {
@@ -70,7 +84,7 @@ final List<Map<String, dynamic>> recentPosts = [
       'store': 'Maria Kitchen',
       'price': '999 da',
       'rating': 4.6,
-      "order": 3 , 
+      "order": 3,
       'image': 'assets/images/pasta.png'
     },
     {
@@ -78,7 +92,7 @@ final List<Map<String, dynamic>> recentPosts = [
       'store': 'Maria Kitchen',
       'price': '650 da',
       'rating': 4.5,
-      "order": 3 , 
+      "order": 3,
       'image': 'assets/images/pasta.png'
     },
   ];
@@ -86,157 +100,140 @@ final List<Map<String, dynamic>> recentPosts = [
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      
-body: SafeArea(
-  child: SingleChildScrollView(
-    child: Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 12.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              GestureDetector(
-                onTap: () {
-                  context.go("/cook_profile");
-                },
-                child: const CircleAvatar(
-                  radius: 22,
-                  backgroundImage: AssetImage("assets/images/pizza_store.jpg"),
-                ),
-              ),
-              const SizedBox(width: 12),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 12.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    const Text(
-                      "Maria's Kitchen",
-                      style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
-                    ),
-                    const SizedBox(height: 4),
-                    Container(
-                      decoration: BoxDecoration(
-                        color: const Color.fromARGB(255, 243, 243, 243),
-                        borderRadius: BorderRadius.circular(12),
+                    // ✅ Replace hardcoded avatar with reusable widget
+                    Expanded(
+                      child: UserAvatarHeader(
+                        avatarRadius: 22,
+                        fontSize: 17,
+                        showBadge: true,
+                        badgeText: "Cookstro",
+                        onTap: () => context.go("/cook_profile"),
                       ),
-                      child: const Padding(
-                        padding: EdgeInsets.symmetric(vertical: 2.0, horizontal: 4),
-                        child: Text(
-                          "Cookstro",
-                          style: TextStyle(fontSize: 13, color: Color.fromARGB(176, 0, 0, 0)),
+                    ),
+                    Material(
+                      color: const Color.fromARGB(255, 251, 251, 251),
+                      shape: const CircleBorder(),
+                      elevation: 3,
+                      child: InkWell(
+                        customBorder: const CircleBorder(),
+                        onTap: () {},
+                        child: const Padding(
+                          padding: EdgeInsets.all(10.0),
+                          child: Icon(
+                            Icons.notifications_none,
+                            color: Color.fromARGB(255, 73, 70, 70),
+                          ),
                         ),
                       ),
                     ),
                   ],
                 ),
-              ),
-              Material(
-                color: const Color.fromARGB(255, 251, 251, 251),
-                shape: const CircleBorder(),
-                elevation: 3,
-                child: InkWell(
-                  customBorder: const CircleBorder(),
-                  onTap: () {},
-                  child: const Padding(
-                    padding: EdgeInsets.all(10.0),
-                    child: Icon(Icons.notifications_none, color: Color.fromARGB(255, 73, 70, 70)),
+
+                const SizedBox(height: 28),
+
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 4.0),
+                  child: _SectionHeader(
+                    title: 'Orders',
+                    actionLabel: 'Go to Orders',
+                    onTapAction: () => context.go('/cook_orders'),
+                    actionColor: const Color.fromARGB(255, 249, 147, 111),
                   ),
                 ),
-              ),
-            ],
-          ),
 
-          const SizedBox(height: 28),
+                const SizedBox(height: 2),
 
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 4.0),
-            child: _SectionHeader(
-              title: 'Orders',
-              actionLabel: 'Go to Orders',
-              onTapAction: () => context.go('/cook_orders'),
-              actionColor: const Color.fromARGB(255, 249, 147, 111),
-            ),
-          ),
-
-          const SizedBox(height: 2),
-
-          SizedBox(
-            height: 145,
-            child: ListView.separated(
-              scrollDirection: Axis.horizontal,
-              itemCount: orders.length,
-              separatorBuilder: (_, __) => const SizedBox(width: 4),
-              itemBuilder: (context, index) {
-                final o = orders[index];
-                return Padding(
-                  padding: const EdgeInsets.only(top : 8.0 , right : 8 , bottom: 8 , left : 2 ),
-                  child: OrderCard(
-                    id: o['id'],
-                    food: o['food'],
-                    client: o['client'],
-                    qty: o['qty'],
-                    status: o['status'],
-                    brand: brand,
+                SizedBox(
+                  height: 145,
+                  child: ListView.separated(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: orders.length,
+                    separatorBuilder: (_, __) => const SizedBox(width: 4),
+                    itemBuilder: (context, index) {
+                      final o = orders[index];
+                      return Padding(
+                        padding: const EdgeInsets.only(
+                          top: 8.0,
+                          right: 8,
+                          bottom: 8,
+                          left: 2,
+                        ),
+                        child: OrderCard(
+                          id: o['id'],
+                          food: o['food'],
+                          client: o['client'],
+                          qty: o['qty'],
+                          status: o['status'],
+                          brand: brand,
+                        ),
+                      );
+                    },
                   ),
-                );
-              },
-            ),
-          ),
+                ),
 
-          const SizedBox(height: 12),
+                const SizedBox(height: 12),
 
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 4.0),
-            child: _SectionHeader(
-              title: 'Menu',
-              actionLabel: 'Go to Menu',
-              onTapAction: () => context.go('/cook_menu'),
-              actionColor:const Color.fromARGB(255, 249, 147, 111),
-            ),
-          ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 4.0),
+                  child: _SectionHeader(
+                    title: 'Menu',
+                    actionLabel: 'Go to Menu',
+                    onTapAction: () => context.go('/cook_menu'),
+                    actionColor: const Color.fromARGB(255, 249, 147, 111),
+                  ),
+                ),
 
-          const SizedBox(height: 12),
+                const SizedBox(height: 12),
 
-          GridView.builder(
-            physics: const NeverScrollableScrollPhysics(),
-            shrinkWrap: true,
-            itemCount: recentPosts.length,
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2,
-              mainAxisSpacing: 14,
-              crossAxisSpacing: 14,
-              childAspectRatio: 0.78,
-            ),
-            itemBuilder: (context, index) {
-              final item = recentPosts[index];
-              return AnimatedOpacity(
-                duration: const Duration(milliseconds: 400),
-                opacity: 1,
-                child: CookFoodCard(
-                  image: item['image'],
-                  price: item['price'],
-                  title: item['title'],
-                  store: item['store'],
-                  rating: item['rating'],
-                  orders: item['order'],
-                  onTap: () {
-                    context.pushNamed("cook_meal_screen");
+                GridView.builder(
+                  physics: const NeverScrollableScrollPhysics(),
+                  shrinkWrap: true,
+                  itemCount: recentPosts.length,
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                    mainAxisSpacing: 14,
+                    crossAxisSpacing: 14,
+                    childAspectRatio: 0.78,
+                  ),
+                  itemBuilder: (context, index) {
+                    final item = recentPosts[index];
+                    return AnimatedOpacity(
+                      duration: const Duration(milliseconds: 400),
+                      opacity: 1,
+                      child: CookFoodCard(
+                        image: item['image'],
+                        price: item['price'],
+                        title: item['title'],
+                        store: item['store'],
+                        rating: item['rating'],
+                        orders: item['order'],
+                        onTap: () {
+                          context.pushNamed("cook_meal_screen");
+                        },
+                      ),
+                    );
                   },
                 ),
-              );
-            },
+              ],
+            ),
           ),
-        ],
+        ),
       ),
-    ),
-  ),
-),
     );
   }
 }
 
+// Rest of the code stays the same...
 class _SectionHeader extends StatelessWidget {
   final String title;
   final String actionLabel;
@@ -254,11 +251,20 @@ class _SectionHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        Text(title, style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+        Text(
+          title,
+          style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+        ),
         const Spacer(),
         GestureDetector(
           onTap: onTapAction,
-          child: Text(actionLabel, style: TextStyle(color: actionColor, fontWeight: FontWeight.w600)),
+          child: Text(
+            actionLabel,
+            style: TextStyle(
+              color: actionColor,
+              fontWeight: FontWeight.w600,
+            ),
+          ),
         ),
       ],
     );
@@ -266,11 +272,11 @@ class _SectionHeader extends StatelessWidget {
 }
 
 class OrderCard extends StatelessWidget {
-  final String id;         
-  final String food;       
-  final String client;     
-  final int qty;           
-  final String status;     
+  final String id;
+  final String food;
+  final String client;
+  final int qty;
+  final String status;
   final Color brand;
 
   const OrderCard({
@@ -306,7 +312,11 @@ class OrderCard extends StatelessWidget {
         color: Colors.white,
         borderRadius: BorderRadius.circular(14),
         boxShadow: const [
-          BoxShadow(color: Color.fromARGB(31, 48, 48, 48), blurRadius: 6, offset: Offset(2, 4)),
+          BoxShadow(
+            color: Color.fromARGB(31, 48, 48, 48),
+            blurRadius: 6,
+            offset: Offset(2, 4),
+          ),
         ],
       ),
       child: Column(
@@ -317,7 +327,10 @@ class OrderCard extends StatelessWidget {
             children: [
               Text(
                 "№ $id",
-                style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                style: const TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 16,
+                ),
               ),
               const Spacer(),
               Icon(icon, color: iconColor, size: 18),
@@ -332,32 +345,35 @@ class OrderCard extends StatelessWidget {
               ),
             ],
           ),
-
           const SizedBox(height: 6),
-
           Text(
-  food,
-  style: const TextStyle(
-    fontSize: 14,
-    fontWeight: FontWeight.w500,
-  ),
-  maxLines: 2, 
-  overflow: TextOverflow.ellipsis, 
-),
+            food,
+            style: const TextStyle(
+              fontSize: 14,
+              fontWeight: FontWeight.w500,
+            ),
+            maxLines: 2,
+            overflow: TextOverflow.ellipsis,
+          ),
           const SizedBox(height: 2),
-
           Row(
             children: [
               Expanded(
                 child: Text(
                   client,
-                  style: const TextStyle(fontSize: 13, color: Color.fromARGB(221, 64, 64, 64)),
+                  style: const TextStyle(
+                    fontSize: 13,
+                    color: Color.fromARGB(221, 64, 64, 64),
+                  ),
                   overflow: TextOverflow.ellipsis,
                 ),
               ),
               const SizedBox(width: 12),
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 8,
+                  vertical: 6,
+                ),
                 decoration: BoxDecoration(
                   color: brand.withOpacity(0.10),
                   borderRadius: BorderRadius.circular(8),
