@@ -19,14 +19,24 @@ def get_user(user_id: UUID, db: Session = Depends(get_db), token_payload: dict =
         raise HTTPException(status_code=404, detail="User not found")
     return user
 
+# app/api/v1/users.py
+
 @router.put("/{user_id}", response_model=UserResponse)
 def update_user(user_id: UUID, data: UserUpdate, db: Session = Depends(get_db), token_payload: dict = Depends(get_token_payload)):
     sub = token_payload["sub"]
     if str(sub) != str(user_id):
         raise HTTPException(status_code=403, detail="Forbidden")
+    
     user = crud_user.get_user(db, user_id)
     if not user:
         raise HTTPException(status_code=404, detail="User not found")
 
+    # ✅ DEBUG: Print what we received
+    print(f"🔥 Received update data: {data.dict(exclude_unset=True)}")
+    
     updated = crud_user.update_user(db, user, data)
+    
+    # ✅ DEBUG: Print what was saved
+    print(f"✅ Saved to DB - profile_picture: {updated.profile_picture}")
+    
     return updated

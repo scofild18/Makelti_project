@@ -27,6 +27,7 @@ def update_user(db: Session, user: User, data: UserUpdate) -> User:
         setattr(user, field, value)
     db.add(user)
     db.commit()
+    
     db.refresh(user)
     return user
 
